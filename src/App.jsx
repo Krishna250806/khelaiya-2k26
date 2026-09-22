@@ -3,33 +3,27 @@ import DoorLoader from './components/DoorLoader';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
-import PassTiersSection from './components/PassTiersSection';
-import RegisterCtaSection from './components/RegisterCtaSection';
-import CommitteeSection from './components/CommitteeSection';
+import EventHighlights from './components/EventHighlights';
+import RegistrationSection from './components/RegistrationSection';
 import SponsorsSection from './components/SponsorsSection';
+import TeamSection from './components/TeamSection';
+import RegisterCtaSection from './components/RegisterCtaSection';
 import GallerySection from './components/GallerySection';
 import ScheduleFaqSection from './components/ScheduleFaqSection';
 import Footer from './components/Footer';
-import RegistrationModal from './components/RegistrationModal';
-import AudioPlayerToggle from './components/AudioPlayerToggle';
 
 export default function App() {
   const [doorsOpen, setDoorsOpen] = useState(false);
-  const [passModalOpen, setPassModalOpen] = useState(false);
-  const [selectedPassTier, setSelectedPassTier] = useState("early-bird");
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-
-  const handleOpenPassModal = (tierId = "early-bird") => {
-    setSelectedPassTier(tierId);
-    setPassModalOpen(true);
-  };
-
-  const handleToggleAudio = () => {
-    setIsAudioPlaying(prev => !prev);
-  };
 
   const handleReopenDoors = () => {
     setDoorsOpen(false);
+  };
+
+  const handleScrollToRegistration = () => {
+    const el = document.getElementById('registration');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -43,55 +37,43 @@ export default function App() {
       {/* 2. Main Festival Experience */}
       <div className={`transition-opacity duration-1000 ${doorsOpen ? 'opacity-100' : 'opacity-0'}`}>
         
-        {/* Sticky Translucent to Gradient Navbar */}
+        {/* Sticky Glassmorphic Navbar */}
         <Navbar
-          onOpenPassModal={() => handleOpenPassModal("early-bird")}
+          onRegisterClick={handleScrollToRegistration}
           onReopenDoors={handleReopenDoors}
-          isAudioPlaying={isAudioPlaying}
-          onToggleAudio={handleToggleAudio}
         />
 
         <main>
-          {/* Hero Section with Three.js 3D Dandiya Centerpiece & Countdown */}
-          <HeroSection onOpenPassModal={() => handleOpenPassModal("early-bird")} />
+          {/* 3. Hero Section */}
+          <HeroSection onRegisterClick={handleScrollToRegistration} />
 
-          {/* About Section: Legacy, Highlights & Counters */}
+          {/* 4. About NUV Khelaiya */}
           <AboutSection />
 
-          {/* Pass Tiers & Pricing Section */}
-          <PassTiersSection onSelectPass={(tierId) => handleOpenPassModal(tierId)} />
+          {/* 5. Event Highlights */}
+          <EventHighlights />
 
-          {/* Committee Members Grid & Category Filters */}
-          <CommitteeSection />
+          {/* 6. Join NUV Khelaiya Registration Section */}
+          <RegistrationSection onRegisterClick={handleScrollToRegistration} />
 
-          {/* Sponsors Showcase with Infinite Marquee */}
+          {/* 7. Sponsors */}
           <SponsorsSection />
 
-          {/* Standalone Urgency Register CTA Section */}
-          <RegisterCtaSection onOpenPassModal={() => handleOpenPassModal("early-bird")} />
+          {/* 8. The Team (Leadership & Team Heads) */}
+          <TeamSection />
 
-          {/* Masonry / Grid Gallery with Lightbox */}
+          {/* 9. Visual Impact CTA: Come. Dance. Celebrate. */}
+          <RegisterCtaSection onRegisterClick={handleScrollToRegistration} />
+
+          {/* 10. Gallery (The Moments) */}
           <GallerySection />
 
-          {/* Schedule Timeline & FAQs */}
+          {/* 11. Event Information & FAQs */}
           <ScheduleFaqSection />
         </main>
 
-        {/* Ornate Footer */}
-        <Footer onOpenPassModal={() => handleOpenPassModal("early-bird")} />
-
-        {/* Ambient Festive Sound Generator Toggle */}
-        <AudioPlayerToggle
-          isPlaying={isAudioPlaying}
-          onToggle={handleToggleAudio}
-        />
-
-        {/* Pass Registration & Digital QR E-Pass Modal */}
-        <RegistrationModal
-          isOpen={passModalOpen}
-          onClose={() => setPassModalOpen(false)}
-          preselectedTierId={selectedPassTier}
-        />
+        {/* 12. Footer */}
+        <Footer onRegisterClick={handleScrollToRegistration} />
 
       </div>
 

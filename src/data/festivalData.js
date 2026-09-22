@@ -1,320 +1,365 @@
 export const FESTIVAL_INFO = {
-  name: "KHELAIYA 2026",
-  subTitle: "The Grand College Ras-Garba Mahotsav",
-  tagline: "Where Ancient Rhythm Meets Youthful Euphoria",
-  date: "October 24, 2026",
-  dateTarget: "2026-10-24T18:00:00+05:30",
-  venue: "Grand Open Grounds, University Campus, Gate 4",
-  city: "Ahmedabad, Gujarat",
-  stats: [
-    { label: "Khelaiyas Dancing", value: "5,000+", icon: "Users" },
-    { label: "Live Dhol & Orchestra", value: "25+ Artists", icon: "Music" },
-    { label: "Prizes & Best Dressed", value: "₹1,50,000+", icon: "Trophy" },
-    { label: "Hours of Non-stop Garba", value: "8+ Hours", icon: "Clock" },
-  ]
+  name: "NUV KHELAIYA",
+  presenter: "NAVRACHANA UNIVERSITY PRESENTS",
+  subTitle: "A celebration of culture, rhythm & togetherness",
+  tagline: "A celebration of culture, rhythm & togetherness",
+  date: "To be announced",
+  venue: "Navrachana University Campus",
+  city: "Vadodara, Gujarat",
+  registrationUrl: "#registration",
 };
 
-export const PASS_TIERS = [
+export const HIGHLIGHTS_DATA = [
   {
-    id: "early-bird",
-    name: "Early Bird Pass",
-    badge: "Limited Time • 40% Off",
-    price: 299,
-    originalPrice: 499,
-    description: "The preferred pass for passionate dancers who secure their spot early.",
-    popular: true,
-    perks: [
-      "Guaranteed Fast-Track Priority Entry at Gate 1",
-      "Complimentary Pair of Handcrafted Wooden Dandiya Sticks",
-      "Food & Beverage Coupon worth ₹100 included",
-      "Exclusive Access to Inner Garba Circle",
-      "Eligible for Best Khelaiya & Best Attire Mega Awards",
-      "Digital Commemorative e-Pass with QR Code",
-    ],
-    urgencyText: "Only 48 passes remaining at this price!",
+    number: "01",
+    title: "Garba",
+    category: "GARBA",
+    description:
+      "Step into the concentric circles and experience the vibrant energy of traditional Garba with rhythmic steps and unity.",
+    asset: "/nuv-assets/Asset 1.svg",
   },
   {
-    id: "regular",
-    name: "Regular Pass",
-    badge: "Standard Entry",
-    price: 499,
-    originalPrice: null,
-    description: "Full access pass for all college students and cultural enthusiasts.",
-    popular: false,
-    perks: [
-      "General Arena Entry at Gate 2 & 3",
-      "Access to Main Dance Arena & DJ Stage",
-      "Access to Food Festival Court & Flea Stalls",
-      "Traditional Aarti & Mega Maha-Garba Participation",
-      "Digital Commemorative e-Pass with QR Code",
-    ],
-    urgencyText: "Entry closes once venue capacity is reached",
+    number: "02",
+    title: "Dandiya",
+    category: "DANDIYA",
+    description:
+      "The synchronized clatter of dandiya sticks ringing under the lights in an exhilarating dance of festivity.",
+    asset: "/nuv-assets/Asset 2.svg",
   },
   {
-    id: "squad-pass",
-    name: "Group Squad Pass (4x)",
-    badge: "Best For Friends",
-    price: 999,
-    originalPrice: 1599,
-    description: "Form your Garba circle! 4 passes bundled with special squad perks.",
-    popular: false,
-    perks: [
-      "4x Fast-Track Entry for the whole squad",
-      "4x Pairs of Decorative LED/Wooden Dandiya Sticks",
-      "Reserved Squad Photo Booth Session with Instant Print",
-      "Food & Mocktail Vouchers worth ₹250",
-      "Dedicated Squad Wristbands & Priority Cloakroom",
-    ],
-    urgencyText: "Squad slots filling rapidly!",
-  }
+    number: "03",
+    title: "Music & Rhythm",
+    category: "MUSIC",
+    description:
+      "From soulful folk melodies to thunderous beats that keep feet moving until the final beat drops.",
+    asset: "/nuv-assets/Asset 3.svg",
+  },
+  {
+    number: "04",
+    title: "Cultural Celebration",
+    category: "CULTURAL CELEBRATION",
+    description:
+      "Honoring Gujarat's heritage with authentic traditional attire, vibrant chaniya cholis, kurtas, and joyful reverence.",
+    asset: "/nuv-assets/Asset 4.svg",
+  },
+  {
+    number: "05",
+    title: "Student Community",
+    category: "STUDENT COMMUNITY",
+    description:
+      "Bringing together students, faculty, and alumni across disciplines in an atmosphere of warmth and connection.",
+    asset: "/nuv-assets/Asset 6.svg",
+  },
+  {
+    number: "06",
+    title: "Festive Experience",
+    category: "FESTIVE EXPERIENCE",
+    description:
+      "An unforgettable evening created by student leaders, designed to celebrate the festive spirit of togetherness.",
+    asset: "/nuv-assets/Asset 7.svg",
+  },
 ];
 
-export const COMMITTEE_MEMBERS = [
+export const ABOUT_PILLARS = [
   {
-    id: 1,
-    name: "Aarav Trivedi",
-    role: "President & Convener",
-    category: "Core Committee",
-    department: "Computer Science, Final Year",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80",
-    instagram: "#",
-    linkedin: "#",
-    quote: "Khelaiya is not just an event; it's the heartbeat of our campus tradition."
+    title: "Culture",
+    subtitle: "Sacred Heritage",
+    description:
+      "NUV Khelaiya honors the timeless traditions of Navratri with reverence, folk dance, and cultural authenticity.",
   },
   {
-    id: 2,
-    name: "Drishi Patel",
-    role: "Cultural Secretary",
-    category: "Core Committee",
-    department: "Design & Media, 3rd Year",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-    instagram: "#",
-    linkedin: "#",
-    quote: "Blending ethnic Gujarat heritage with modern energy for our generation."
+    title: "Music",
+    subtitle: "Rhythmic Heartbeat",
+    description:
+      "High-energy dhol rhythms and folk anthems set the pace for an unforgettable evening of dance.",
   },
   {
-    id: 3,
-    name: "Karan Joshi",
-    role: "Head of Music & Production",
-    category: "Heads",
-    department: "Mechanical Engineering, Final Year",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-    instagram: "#",
-    linkedin: "#",
-    quote: "Get ready for ground-shaking dhol beats and authentic traditional raas."
+    title: "Garba",
+    subtitle: "The Sacred Circle",
+    description:
+      "Concentric rings of dancers moving in graceful synergy, creating moments of pure celebration.",
   },
   {
-    id: 4,
-    name: "Ananya Mehta",
-    role: "Head of Decor & Aesthetics",
-    category: "Heads",
-    department: "Architecture, 4th Year",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80",
-    instagram: "#",
-    linkedin: "#",
-    quote: "Creating an enchanting golden palace of 10,000 fairy lights and rangolis."
+    title: "Community",
+    subtitle: "Together as One",
+    description:
+      "Uniting the entire Navrachana University family to celebrate friendship, heritage, and campus pride.",
   },
-  {
-    id: 5,
-    name: "Devang Shah",
-    role: "Head of Sponsorships & PR",
-    category: "Heads",
-    department: "Business Administration, 3rd Year",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-    instagram: "#",
-    linkedin: "#",
-    quote: "Partnering with the finest youth brands to make this edition unforgettable."
-  },
-  {
-    id: 6,
-    name: "Tanvi Bhatt",
-    role: "Lead Coordinator - Security & Crowd",
-    category: "Volunteers",
-    department: "Civil Engineering, 3rd Year",
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80",
-    instagram: "#",
-    linkedin: "#",
-    quote: "Safety, comfort, and unmatched vibes for every single student attending."
-  },
-  {
-    id: 7,
-    name: "Rohan Desai",
-    role: "Lead - Competitions & Judges",
-    category: "Volunteers",
-    department: "Information Technology, 2nd Year",
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80",
-    instagram: "#",
-    linkedin: "#",
-    quote: "Showcase your best three-taali and dodhiya steps to win the grand crown!"
-  },
-  {
-    id: 8,
-    name: "Meera Vora",
-    role: "Lead - Stage & Hospitality",
-    category: "Volunteers",
-    department: "Humanities & Arts, 2nd Year",
-    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
-    instagram: "#",
-    linekdin: "#",
-    quote: "Welcoming 5000+ dancers with traditional tilak and warmth."
-  }
 ];
 
-export const SPONSORS = [
+export const LEADERSHIP_TEAM = {
+  presidents: [
+    {
+      name: "Jatin Asnani",
+      designation: "President",
+      image: "/profiles/jatin.JPG",
+    },
+    {
+      name: "Krisha Savalia",
+      designation: "President",
+      image: "/profiles/krisha.jpeg",
+    },
+  ],
+  vicePresidents: [
+    {
+      name: "Rishita Pittie",
+      designation: "Vice-President",
+      image: null, // Tasteful placeholder
+    },
+    {
+      name: "Vidhi Shah",
+      designation: "Vice-President",
+      image: null, // Tasteful placeholder
+    },
+  ],
+  treasurers: [
+    {
+      name: "Ayaan Barodalawala",
+      designation: "Treasurer",
+      image: "/profiles/ayaan.jpeg",
+    },
+    {
+      name: "Suryansh Rana",
+      designation: "Treasurer",
+      image: "/profiles/suryansh.jpeg",
+    },
+  ],
+};
+
+export const TEAM_HEADS = [
   {
-    tier: "Title Sponsor",
-    name: "Royal Gujarat Heritage",
-    subtitle: "Presented By",
-    logoText: "ROYAL GUJARAT",
-    category: "Cultural Tourism & Heritage",
+    teamName: "Outreach Team",
+    members: [
+      {
+        name: "Krinal Prajapati",
+        designation: "Outreach Team Head",
+        image: "/profiles/krinal.JPG",
+      },
+      {
+        name: "Darshil Acharya",
+        designation: "Outreach Team Head",
+        image: "/profiles/darshil.JPG",
+      },
+      {
+        name: "Maniya Marothia",
+        designation: "Outreach Team Head",
+        image: "/profiles/maniya.jpg",
+      },
+    ],
   },
   {
-    tier: "Powered By",
-    name: "Zestify Youth Beverages",
-    subtitle: "Official Hydration Partner",
-    logoText: "ZESTIFY BEV",
-    category: "Energy & Refreshments",
+    teamName: "Media Team",
+    members: [
+      {
+        name: "Priyanshu Panchal",
+        designation: "Media Team Head",
+        image: "/profiles/priyanshu.jpeg",
+      },
+      {
+        name: "Rohit Sanjay",
+        designation: "Media Team Head",
+        image: "/profiles/rohit.jpeg",
+      },
+    ],
   },
   {
-    tier: "Gold Sponsor",
-    name: "KalaNiketan Ethnic Studio",
-    subtitle: "Official Wardrobe & Styling",
-    logoText: "KALANIKETAN",
-    category: "Traditional Fashion",
+    teamName: "Marketing Team",
+    members: [
+      {
+        name: "Sai Bhatt",
+        designation: "Marketing Team Head",
+        image: "/profiles/sai.jpeg",
+      },
+      {
+        name: "Manit Mehta",
+        designation: "Marketing Team Head",
+        image: "/profiles/manit.jpeg",
+      },
+    ],
   },
   {
-    tier: "Gold Sponsor",
-    name: "CampusVibe Audio & Lights",
-    subtitle: "Sound & Stage Partner",
-    logoText: "CAMPUSVIBE",
-    category: "Stage Production",
+    teamName: "Cultural Team",
+    members: [
+      {
+        name: "Tanishi Mehta",
+        designation: "Cultural Team Head",
+        image: "/profiles/tanishi.JPG",
+      },
+      {
+        name: "Vedant Khatri",
+        designation: "Cultural Team Head",
+        image: "/profiles/vedant.JPG",
+      },
+    ],
   },
   {
-    tier: "Silver Sponsor",
-    name: "Farsan Express Sweets",
-    subtitle: "Snacks & Food Partner",
-    logoText: "FARSAN EXPRESS",
-    category: "Authentic Delicacies",
+    teamName: "Technical Team",
+    members: [
+      {
+        name: "Aditya Chandiramani",
+        designation: "Technical Team Head",
+        image: "/profiles/addy.jpeg",
+      },
+      {
+        name: "Krishna Agrawal",
+        designation: "Technical & Esports Teams Head",
+        image: "/profiles/krishna.jpeg",
+      },
+    ],
   },
   {
-    tier: "Silver Sponsor",
-    name: "Radio Mirchi 98.3",
-    subtitle: "Exclusive Media Partner",
-    logoText: "MIRCHI RADIO",
-    category: "Media & Broadcast",
+    teamName: "Esports Team",
+    members: [
+      {
+        name: "Krishna Agrawal",
+        designation: "Technical & Esports Teams Head",
+        image: "/profiles/krishna.jpeg",
+      },
+      {
+        name: "Aditya Kundu",
+        designation: "Esports Team Head",
+        image: null, // Tasteful placeholder
+      },
+      {
+        name: "Mitanshu Nayak",
+        designation: "Esports Team Head",
+        image: "/profiles/mitanshu.jpeg",
+      },
+    ],
   },
   {
-    tier: "Silver Sponsor",
-    name: "PixelCraft Photography",
-    subtitle: "Moments Partner",
-    logoText: "PIXELCRAFT",
-    category: "Media Coverage",
-  }
+    teamName: "Social Media Team",
+    members: [
+      {
+        name: "Aashvi Shah",
+        designation: "Social Media Team Head",
+        image: "/profiles/aashvi.JPG",
+      },
+      {
+        name: "Abhay Jayprakash Mahato",
+        designation: "Social Media Team Head",
+        image: "/profiles/abhay.JPG",
+      },
+      {
+        name: "Krishva Parekh",
+        designation: "Social Media Team Head",
+        image: "/profiles/krishva.JPG",
+      },
+    ],
+  },
+  {
+    teamName: "Content Team",
+    members: [
+      {
+        name: "Deeksha Kulkarni",
+        designation: "Content Team Head",
+        image: "/profiles/deeksha.jpeg",
+      },
+      {
+        name: "Suhani Shah",
+        designation: "Content Team Head",
+        image: "/profiles/suhani.JPG",
+      },
+    ],
+  },
+  {
+    teamName: "Decoration Team",
+    members: [
+      {
+        name: "Queena Khoja",
+        designation: "Decoration Team Head",
+        image: "/profiles/queena.jpg",
+      },
+      {
+        name: "Vanshi Thakkar",
+        designation: "Decoration Team Head",
+        image: "/profiles/vanshi.JPG",
+      },
+      {
+        name: "Twisha Murani",
+        designation: "Decoration Team Head",
+        image: "/profiles/twisha.JPG",
+      },
+    ],
+  },
+  {
+    teamName: "Design Team",
+    members: [
+      {
+        name: "Diya Jhaveri",
+        designation: "Design Team Head",
+        image: null, // Tasteful placeholder
+      },
+      {
+        name: "Rachit Patel",
+        designation: "Design Team Head",
+        image: null, // Tasteful placeholder
+      },
+    ],
+  },
 ];
 
 export const GALLERY_ITEMS = [
   {
     id: 1,
-    title: "The Great Maha-Ras Circle",
-    category: "Garba Circles",
-    image: "https://images.unsplash.com/photo-1603228254119-e6a4d095dc59?auto=format&fit=crop&w=1200&q=80",
-    caption: "Over 2,500 dancers moving in synchronized concentric circles under midnight floodlights.",
+    title: "The Spirit of Garba",
+    category: "Garba",
+    image: "/gallery/garba 1.jpeg",
   },
   {
     id: 2,
-    title: "Radiant Chaniya Choli & Mirrorwork",
-    category: "Fashion & Glamour",
-    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=80",
-    caption: "Handcrafted Kutchi embroidery, glimmering mirrors, and traditional oxidized silver jewelry.",
+    title: "Rhythm & Joy",
+    category: "Celebration",
+    image: "/gallery/garba 2.jpeg",
   },
   {
     id: 3,
-    title: "Thunderous Dhol Beats",
-    category: "Music & Beats",
-    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80",
-    caption: "Live master percussionists accelerating the tempo from gentle heench to electric dodhiya.",
+    title: "Moments of Togetherness",
+    category: "Community",
+    image: "/gallery/garba 3.jpeg",
   },
   {
     id: 4,
-    title: "The Divine 1,000 Diya Aarti",
-    category: "Traditions & Aarti",
-    image: "https://images.unsplash.com/photo-1576487246293-e4d0d3f2ec4e?auto=format&fit=crop&w=1200&q=80",
-    caption: "The spiritual pinnacle: 1,000 brass lamps ignited together for Maa Ambe's royal blessing.",
+    title: "Festive Night at NUV",
+    category: "Tradition",
+    image: "/gallery/garba 4.jpeg",
   },
-  {
-    id: 5,
-    title: "High-Energy Dandiya Clashes",
-    category: "Garba Circles",
-    image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1200&q=80",
-    caption: "Synchronized beats of carved wooden sticks echoing through the university grounds.",
-  },
-  {
-    id: 6,
-    title: "Crowning The Best Khelaiya",
-    category: "Celebrity Moments",
-    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80",
-    caption: "Jubilant winners receiving trophies and ₹50,000 cash prize for extraordinary grace & stamina.",
-  }
-];
-
-export const SCHEDULE_TIMELINE = [
-  {
-    time: "06:00 PM",
-    title: "Grand Gates Open & Red Carpet Welcome",
-    description: "Traditional dhol स्वागत, tilak ceremony, and distribution of complimentary dandiya sticks for Early Bird pass holders.",
-    icon: "DoorOpen"
-  },
-  {
-    time: "07:00 PM",
-    title: "Ganesh Sthapana & Lamp Lighting",
-    description: "Inaugural ceremony by the University Dean, Cultural Patron, and lightning of the monumental 7-foot brass Diya.",
-    icon: "Flame"
-  },
-  {
-    time: "07:30 PM",
-    title: "Round 1: Classical 2-Taali & 3-Taali Raas",
-    description: "Traditional slow-to-medium pace Garba hymns led by folk singers Pt. Devang Vyas & ensemble.",
-    icon: "Music"
-  },
-  {
-    time: "09:30 PM",
-    title: "Maha Aarti Ceremony & Sacred Prasad",
-    description: "1,000 floating brass aarti lamps held simultaneously in reverent silence followed by campus-wide prasad distribution.",
-    icon: "Sparkles"
-  },
-  {
-    time: "10:15 PM",
-    title: "Round 2: Electric Dodhiya & Fusion Raas",
-    description: "High-octane tempo with 12-step dodhiya, popat, and synchronized group choreographies with laser shows.",
-    icon: "Zap"
-  },
-  {
-    time: "11:30 PM",
-    title: "Sanedo Sanedo & Grand Prize Awards",
-    description: "Crowning of 'Best Khelaiya (Male & Female)', 'Best Traditional Attire', and 'Best Energy Squad' followed by celebration.",
-    icon: "Trophy"
-  }
 ];
 
 export const FAQ_ITEMS = [
   {
-    question: "Is traditional attire mandatory to enter the dance arena?",
-    answer: "Yes! To preserve the festive sanctity and cultural beauty of Khelaiya, Chaniya Choli / Kediyu / Kurta Pajama / Dhoti is mandatory for anyone entering the active Garba dance arena. Spectators in the seating gallery can wear festive ethnic wear."
+    question: "Who can attend NUV Khelaiya?",
+    answer:
+      "NUV Khelaiya is open to the Navrachana University community, including students, faculty, staff, and authorized guests. Valid university identification or approved registration is required for entry.",
   },
   {
-    question: "Can students from other colleges or universities register?",
-    answer: "Absolutely! Khelaiya is an inter-collegiate festival open to all accredited university & college students. You must present your valid College ID along with your digital QR e-Pass at the gate."
+    question: "How do I register for NUV Khelaiya?",
+    answer:
+      "Registration details and the official registration portal link will be published on this website and shared across official university channels. Please keep an eye on announcements.",
   },
   {
-    question: "Are Dandiya sticks provided, or should we bring our own?",
-    answer: "Early Bird & Squad Pass holders receive a complimentary pair of handcrafted polished wooden dandiyas at the entrance. Regular pass holders may bring their own or purchase designer pairs at our campus cultural stalls."
+    question: "What should I wear?",
+    answer:
+      "Traditional festive Indian attire is highly encouraged (Chaniya Choli, Kurta, Kediyu, Dhoti) to celebrate the festive spirit and heritage of Navratri.",
   },
   {
-    question: "What security and medical facilities are in place?",
-    answer: "The venue features 24/7 campus security, dedicated female helpdesks, certified emergency medical doctors, a standby ambulance, and free water refill hydration stations throughout the grounds."
+    question: "Where is the event taking place?",
+    answer:
+      "The event takes place at the Navrachana University campus in Vadodara, Gujarat. Exact arena and entry gate details will be shared closer to the event.",
   },
   {
-    question: "What is the pass refund or transfer policy?",
-    answer: "Passes are non-refundable but can be transferred to another student with valid college ID up to 48 hours prior to the festival date by contacting the support helpdesk."
-  }
+    question: "Is registration mandatory?",
+    answer:
+      "Yes, prior registration is required for all attendees to ensure smooth campus entry, safety, and event organization.",
+  },
+  {
+    question: "What should I bring?",
+    answer:
+      "Please carry your official Student/Staff ID card along with your digital or printed registration confirmation. You are also welcome to bring your own Dandiya sticks.",
+  },
+  {
+    question: "Who can I contact for queries?",
+    answer:
+      "You can reach out to the organizing team through official student council representatives, team heads, or university cultural affairs channels.",
+  },
 ];
