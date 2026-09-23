@@ -1,11 +1,13 @@
 export const FESTIVAL_INFO = {
-  name: "NUV KHELAIYA",
-  presenter: "NAVRACHANA UNIVERSITY PRESENTS",
+  name: "NUV खेलैया",
+  presenter: "NAVRATRI 2026",
   subTitle: "A celebration of culture, rhythm & togetherness",
   tagline: "A celebration of culture, rhythm & togetherness",
-  date: "To be announced",
-  venue: "Navrachana University Campus",
+  date: "24th October 2026",
+  targetDate: "2026-10-24T18:00:00+05:30",
+  venue: "Jyoti Party Plot",
   city: "Vadodara, Gujarat",
+  address: "Jyoti Party Plot, Vadodara, Gujarat",
   registrationUrl: "#registration",
 };
 
@@ -60,33 +62,6 @@ export const HIGHLIGHTS_DATA = [
   },
 ];
 
-export const ABOUT_PILLARS = [
-  {
-    title: "Culture",
-    subtitle: "Sacred Heritage",
-    description:
-      "NUV Khelaiya honors the timeless traditions of Navratri with reverence, folk dance, and cultural authenticity.",
-  },
-  {
-    title: "Music",
-    subtitle: "Rhythmic Heartbeat",
-    description:
-      "High-energy dhol rhythms and folk anthems set the pace for an unforgettable evening of dance.",
-  },
-  {
-    title: "Garba",
-    subtitle: "The Sacred Circle",
-    description:
-      "Concentric rings of dancers moving in graceful synergy, creating moments of pure celebration.",
-  },
-  {
-    title: "Community",
-    subtitle: "Together as One",
-    description:
-      "Uniting the entire Navrachana University family to celebrate friendship, heritage, and campus pride.",
-  },
-];
-
 export const LEADERSHIP_TEAM = {
   presidents: [
     {
@@ -104,7 +79,7 @@ export const LEADERSHIP_TEAM = {
     {
       name: "Rishita Pittie",
       designation: "Vice-President",
-      image: null, // Tasteful placeholder
+      image: "/profiles/rishita.JPG",
     },
     {
       name: "Vidhi Shah",
@@ -126,24 +101,48 @@ export const LEADERSHIP_TEAM = {
   ],
 };
 
+export const OUTREACH_CONTACTS = [
+  {
+    name: "Darshil Acharya",
+    designation: "Outreach Team Head",
+    image: "/profiles/darshil.JPG",
+    phone: "+91 90331 51005",
+  },
+  {
+    name: "Krinal Prajapati",
+    designation: "Outreach Team Head",
+    image: "/profiles/krinal.JPG",
+    phone: "+91 93168 05004",
+  },
+  {
+    name: "Manya Marothia",
+    designation: "Outreach Team Head",
+    image: "/profiles/maniya.jpg",
+    phone: "+91 63533 45049",
+  },
+];
+
 export const TEAM_HEADS = [
   {
     teamName: "Outreach Team",
     members: [
       {
-        name: "Krinal Prajapati",
-        designation: "Outreach Team Head",
-        image: "/profiles/krinal.JPG",
-      },
-      {
         name: "Darshil Acharya",
         designation: "Outreach Team Head",
         image: "/profiles/darshil.JPG",
+        phone: "+91 90331 51005",
       },
       {
-        name: "Maniya Marothia",
+        name: "Krinal Prajapati",
+        designation: "Outreach Team Head",
+        image: "/profiles/krinal.JPG",
+        phone: "+91 93168 05004",
+      },
+      {
+        name: "Manya Marothia",
         designation: "Outreach Team Head",
         image: "/profiles/maniya.jpg",
+        phone: "+91 63533 45049",
       },
     ],
   },
@@ -198,7 +197,7 @@ export const TEAM_HEADS = [
       {
         name: "Aditya Chandiramani",
         designation: "Technical Team Head",
-        image: "/profiles/addy.jpeg",
+        image: "/profiles/Addy.jpeg",
       },
       {
         name: "Krishna Agrawal",
@@ -218,7 +217,7 @@ export const TEAM_HEADS = [
       {
         name: "Aditya Kundu",
         designation: "Esports Team Head",
-        image: null, // Tasteful placeholder
+        image: "/profiles/aadu.jpeg",
       },
       {
         name: "Mitanshu Nayak",
@@ -288,12 +287,12 @@ export const TEAM_HEADS = [
       {
         name: "Diya Jhaveri",
         designation: "Design Team Head",
-        image: null, // Tasteful placeholder
+        image: "/profiles/diya.JPG",
       },
       {
         name: "Rachit Patel",
         designation: "Design Team Head",
-        image: null, // Tasteful placeholder
+        image: "/profiles/rachit.JPG",
       },
     ],
   },
@@ -326,16 +325,47 @@ export const GALLERY_ITEMS = [
   },
 ];
 
+export const SPONSORS_DATA = {
+  titleSponsors: [
+    {
+      id: "title-1",
+      name: "IMS",
+      logo: "/sponsors/ims.jpg",
+      tier: "Grand Title Sponsor",
+      description: "Official Presenting Partner for NUV खेलैया 2026",
+      tagline: "Presented By",
+    },
+    {
+      id: "title-2",
+      name: "Kanan International",
+      logo: "/sponsors/kanan.jpg",
+      tier: "Co-Title Sponsor",
+      description: "Powered By Partner for Divine Navratri Garba Nights",
+      tagline: "Powered By",
+    },
+  ],
+  otherSponsors: [
+    { id: "other-1", name: "Sur Taal Beats", role: "Sound & Light Partner" },
+    { id: "other-2", name: "Vadodara Express", role: "Media Partner" },
+    { id: "other-3", name: "Amrut Beverage Co.", role: "Refreshment Partner" },
+    { id: "other-4", name: "Shree Mandap Creators", role: "Decor & Ambience" },
+    { id: "other-5", name: "Chaniya Choli Hub", role: "Fashion & Attire" },
+    { id: "other-6", name: "Garuda Security Services", role: "Safety & Security" },
+    { id: "other-7", name: "Maharaja Caterers", role: "Food & Hospitality" },
+    { id: "other-8", name: "Vadodara Live Digital", role: "Digital Partner" },
+  ],
+};
+
 export const FAQ_ITEMS = [
   {
-    question: "Who can attend NUV Khelaiya?",
+    question: "Who can attend NUV खेलैया?",
     answer:
-      "NUV Khelaiya is open to the Navrachana University community, including students, faculty, staff, and authorized guests. Valid university identification or approved registration is required for entry.",
+      "NUV खेलैया is open to Garba enthusiasts, students, youth, and authorized guests. Valid passes or approved registration confirmation is required for entry.",
   },
   {
-    question: "How do I register for NUV Khelaiya?",
+    question: "How do I register for NUV खेलैया?",
     answer:
-      "Registration details and the official registration portal link will be published on this website and shared across official university channels. Please keep an eye on announcements.",
+      "Registration passes will be available soon on this official portal. Stay tuned as registration opens shortly.",
   },
   {
     question: "What should I wear?",
@@ -345,21 +375,22 @@ export const FAQ_ITEMS = [
   {
     question: "Where is the event taking place?",
     answer:
-      "The event takes place at the Navrachana University campus in Vadodara, Gujarat. Exact arena and entry gate details will be shared closer to the event.",
+      "The event takes place at Jyoti Party Plot in Vadodara, Gujarat. Entry gates, parking areas, and timing details will be notified on the portal.",
   },
   {
     question: "Is registration mandatory?",
     answer:
-      "Yes, prior registration is required for all attendees to ensure smooth campus entry, safety, and event organization.",
+      "Yes, registration/entry pass is mandatory for all attendees to ensure smooth entry, security, and comfortable crowd experience.",
   },
   {
     question: "What should I bring?",
     answer:
-      "Please carry your official Student/Staff ID card along with your digital or printed registration confirmation. You are also welcome to bring your own Dandiya sticks.",
+      "Please carry a valid photo ID along with your digital or printed registration confirmation pass. You are also welcome to bring your favorite Dandiya sticks.",
   },
   {
     question: "Who can I contact for queries?",
     answer:
-      "You can reach out to the organizing team through official student council representatives, team heads, or university cultural affairs channels.",
+      "You can reach out to the organizing committee and team heads through the contact links on this portal.",
   },
 ];
+

@@ -12,6 +12,11 @@ export default function EventHighlights() {
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 rounded-full bg-radial from-[#febf4a]/10 to-transparent blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 w-96 h-96 rounded-full bg-radial from-[#5f1040]/25 to-transparent blur-3xl pointer-events-none" />
 
+      {/* Background Cultural Artwork: In Rhythm & Colour Dancers Arc (Asset 2) */}
+      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full max-w-4xl pointer-events-none opacity-20 filter drop-shadow-[0_0_30px_rgba(254,191,74,0.3)] select-none">
+        <img src="/nuv-assets/Asset 2.svg" alt="" className="w-full h-auto object-contain mx-auto" />
+      </div>
+
       <div className="relative max-w-7xl mx-auto z-10">
         
         {/* Section Heading */}
@@ -19,11 +24,11 @@ export default function EventHighlights() {
           badge="The Experience"
           title="MORE THAN JUST"
           highlight="GARBA"
-          subtitle="NUV Khelaiya brings together dance, rhythm, culture, and community in one unified campus celebration."
+          subtitle="NUV खेलैया brings together dance, rhythm, culture, and community in one grand celebration."
         />
 
         {/* 6 Event Experience Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-12">
           {HIGHLIGHTS_DATA.map((item, idx) => (
             <motion.div
               key={item.number}
@@ -36,19 +41,15 @@ export default function EventHighlights() {
             >
               <div className="h-full rounded-[23px] bg-gradient-to-b from-[#3a0826]/90 via-[#220417]/95 to-[#0b262d]/90 p-7 sm:p-8 flex flex-col justify-between backdrop-blur-xl relative">
                 
-                {/* Top Row: Number & Category Badge */}
+                {/* Top Row: Number */}
                 <div className="flex items-center justify-between mb-6">
                   <span className="font-mono text-2xl sm:text-3xl font-bold text-gradient-gold opacity-90">
                     {item.number}
                   </span>
-
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#febf4a] px-3 py-1 rounded-full bg-[#5f1040]/80 border border-[#febf4a]/35 shadow-sm">
-                    {item.category}
-                  </span>
                 </div>
 
                 {/* Center Content */}
-                <div className="my-auto">
+                <div className="my-auto pb-2">
                   <h3 className="font-display text-2xl font-bold text-white mb-3 group-hover:text-[#febf4a] transition-colors flex items-center justify-between">
                     <span>{item.title}</span>
                     <ArrowUpRight className="w-5 h-5 text-[#febf4a]/50 group-hover:text-[#febf4a] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -58,15 +59,6 @@ export default function EventHighlights() {
                     {item.description}
                   </p>
                 </div>
-
-                {/* Decorative Bottom Bar */}
-                <div className="mt-8 pt-4 border-t border-[#febf4a]/15 flex items-center justify-between">
-                  <span className="text-[11px] font-medium text-[#febf4a]/70 group-hover:text-[#febf4a] transition-colors">
-                    NUV Khelaiya Experience
-                  </span>
-                  <div className="w-2 h-2 rounded-full bg-[#febf4a] opacity-40 group-hover:opacity-100 group-hover:scale-125 transition-all" />
-                </div>
-
               </div>
             </motion.div>
           ))}

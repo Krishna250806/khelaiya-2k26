@@ -8,6 +8,16 @@
   --color-teal: #0f4d5b;
 }
 
+/* User Custom Typography */
+.font-nuv {
+  font-family: 'Cinzel Decorative', serif !important;
+}
+
+.font-khelaiya {
+  font-family: 'Khand', sans-serif !important;
+  font-weight: 600 !important;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
@@ -24,7 +34,6 @@
   background: linear-gradient(180deg, #ffd982 0%, #801857 100%);
 }
 
-/* Global Festive Background Pattern */
 body {
   background-color: #210314;
   background-image: 
@@ -35,6 +44,33 @@ body {
   background-attachment: fixed;
   color: #fff0c2;
   font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+/* Off-screen rendering optimization for low-end devices */
+#gallery, #sponsors, #team, #faq {
+  content-visibility: auto;
+  contain-intrinsic-size: 700px;
+}
+
+/* GPU Acceleration utility */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Gradient Text Utilities */
@@ -132,3 +168,22 @@ body {
   animation: flame-flicker 1.8s ease-in-out infinite;
   transform-origin: bottom center;
 }
+
+/* Toran Hanging Sway Animation */
+@keyframes toran-sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(1.2deg);
+  }
+  75% {
+    transform: rotate(-1.2deg);
+  }
+}
+
+.animate-toran-sway {
+  animation: toran-sway 5s ease-in-out infinite;
+  transform-origin: top center;
+}
+

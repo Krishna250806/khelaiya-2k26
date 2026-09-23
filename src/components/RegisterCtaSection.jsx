@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { FESTIVAL_INFO } from '../data/festivalData';
 import { MandalaPattern } from './common/MandalaDecorations';
+import FestiveCardBorder from './common/FestiveCardBorder';
 
 export default function RegisterCtaSection({ onRegisterClick }) {
   return (
@@ -18,10 +19,16 @@ export default function RegisterCtaSection({ onRegisterClick }) {
           
           <div className="rounded-[22px] bg-gradient-to-br from-[#2a061b] via-[#3a0826] to-[#072b33] p-8 sm:p-14 md:p-16 text-center relative overflow-hidden">
             
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#febf4a]/40 bg-[#5f1040]/80 text-[#febf4a] text-xs font-bold uppercase tracking-[0.25em] mb-6 shadow-md">
-              <Sparkles className="w-3.5 h-3.5 text-[#febf4a]" />
-              <span>NUV KHELAIYA</span>
+            {/* Ornate Festive Border on All 4 Sides */}
+            <FestiveCardBorder className="opacity-80" />
+
+            {/* Row of Vibrant Gujarati Dandiya & Garba Dancers (Asset 4 Element) */}
+            <div className="w-full max-w-sm sm:max-w-md mx-auto mb-5 relative z-10">
+              <img
+                src="/nuv-assets/asset4_dancers_row.svg"
+                alt="Gujarati Garba Dancers in Traditional Attire"
+                className="w-full max-h-24 sm:max-h-28 object-contain mx-auto filter brightness-110 drop-shadow-[0_4px_15px_rgba(254,191,74,0.45)]"
+              />
             </div>
 
             {/* Main Bold Title */}
@@ -31,7 +38,7 @@ export default function RegisterCtaSection({ onRegisterClick }) {
 
             {/* Subtitle */}
             <p className="text-lg sm:text-2xl text-[#fff0c2]/90 max-w-xl mx-auto mb-10 font-medium">
-              Experience NUV Khelaiya.
+              Experience <span className="font-nuv font-bold">NUV </span><span className="font-khelaiya">खेलैया</span>.
             </p>
 
             {/* Primary Action Button */}

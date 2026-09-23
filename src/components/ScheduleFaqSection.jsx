@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp, HelpCircle, Calendar, MapPin, Clock, Ticket, Sparkles } from 'lucide-react';
 import SectionHeading from './common/SectionHeading';
-import { FAQ_ITEMS } from '../data/festivalData';
+import { FAQ_ITEMS, FESTIVAL_INFO } from '../data/festivalData';
 
 export default function ScheduleFaqSection() {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
@@ -28,11 +28,16 @@ export default function ScheduleFaqSection() {
           
           {/* Left Column: Event Details */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="flex items-center gap-2 mb-2">
-              <Sparkles className="w-5 h-5 text-[#febf4a]" />
-              <h3 className="font-display text-2xl font-bold text-white">
-                Event Details
-              </h3>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-[#febf4a]" />
+                <h3 className="font-display text-2xl font-bold text-white">
+                  Event Details
+                </h3>
+              </div>
+              <div className="w-16 h-10 overflow-hidden">
+                <img src="/nuv-assets/asset4_temple_bells.svg" alt="Temple Bells" className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_2px_8px_rgba(254,191,74,0.4)]" />
+              </div>
             </div>
 
             {/* Event Details Card */}
@@ -48,10 +53,10 @@ export default function ScheduleFaqSection() {
                     Event Date
                   </span>
                   <h4 className="font-display text-lg font-bold text-white mt-0.5">
-                    To be announced
+                    {FESTIVAL_INFO.date}
                   </h4>
                   <p className="text-xs text-[#fff0c2]/70 mt-1">
-                    Official festival date will be notified to all university departments.
+                    Saturday • Gates open for students, faculty & guests.
                   </p>
                 </div>
               </div>
@@ -68,10 +73,10 @@ export default function ScheduleFaqSection() {
                     Venue
                   </span>
                   <h4 className="font-display text-lg font-bold text-white mt-0.5">
-                    Navrachana University Campus
+                    Jyoti Party Plot
                   </h4>
                   <p className="text-xs text-[#fff0c2]/70 mt-1">
-                    Vadodara, Gujarat • Specific arena & gate details to be announced.
+                    Vadodara, Gujarat • Entry passes & gate instructions to be announced.
                   </p>
                 </div>
               </div>

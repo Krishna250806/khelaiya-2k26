@@ -47,13 +47,13 @@ export default function App() {
           {/* 3. Hero Section */}
           <HeroSection onRegisterClick={handleScrollToRegistration} />
 
-          {/* 4. About NUV Khelaiya */}
+          {/* 4. About NUV खेलैया */}
           <AboutSection />
 
           {/* 5. Event Highlights */}
           <EventHighlights />
 
-          {/* 6. Join NUV Khelaiya Registration Section */}
+          {/* 6. Join NUV खेलैया Registration Section */}
           <RegistrationSection onRegisterClick={handleScrollToRegistration} />
 
           {/* 7. Sponsors */}

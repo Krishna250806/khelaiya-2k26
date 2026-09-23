@@ -12,18 +12,18 @@ export default function SectionHeading({
 
   return (
     <div className={`mb-12 md:mb-16 ${isCenter ? 'text-center' : 'text-left'}`}>
-      {badge && (
-        <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest mb-3 border border-[#febf4a]/40 bg-[#5f1040]/60 text-[#febf4a] backdrop-blur-md shadow-sm`}>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#febf4a] animate-ping" />
-          <span>{badge}</span>
-        </div>
-      )}
-
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight leading-tight text-white">
         {title}{" "}
         {highlight && (
           <span className="text-gradient-gold drop-shadow-sm inline-block">
-            {highlight}
+            {typeof highlight === 'string' && highlight.includes('खेलैया') ? (
+              <>
+                {highlight.includes('NUV') && <span className="font-nuv">NUV </span>}
+                <span className="font-khelaiya">खेलैया</span>
+              </>
+            ) : (
+              highlight
+            )}
           </span>
         )}
       </h2>

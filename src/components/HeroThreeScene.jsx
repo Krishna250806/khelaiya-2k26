@@ -8,6 +8,10 @@ export default function HeroThreeScene() {
     const container = containerRef.current;
     if (!container) return;
 
+    // Device & Performance Detection for Low-End Optimization
+    const isMobile = typeof window !== 'undefined' && (window.innerWidth < 768 || navigator.maxTouchPoints > 0);
+    const isLowEnd = isMobile || (typeof navigator !== 'undefined' && navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+
     // 1. Scene Setup
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x210314, 0.045);
@@ -21,10 +25,14 @@ export default function HeroThreeScene() {
     );
     camera.position.set(0, 0, 8.5);
 
-    // 3. Renderer Setup
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+    // 3. Renderer Setup (Clamped pixel ratio for optimal FPS on low-end screens)
+    const renderer = new THREE.WebGLRenderer({ 
+      alpha: true, 
+      antialias: !isLowEnd, 
+      powerPreference: "high-performance" 
+    });
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isLowEnd ? 1.25 : 1.75));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.3;
     container.appendChild(renderer.domElement);
@@ -166,7 +174,8 @@ export default function HeroThreeScene() {
     scene.add(haloGroup);
 
     // 7. Golden Festive Sparkle Particle System (Embers / Confetti)
-    const particleCount = 750;
+    // Low-end devices use fewer particles to conserve memory and fill rate
+    const particleCount = isLowEnd ? 140 : 380;
     const particleGeo = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const scales = new Float32Array(particleCount);
@@ -211,7 +220,7 @@ export default function HeroThreeScene() {
     const particleTexture = new THREE.CanvasTexture(canvas);
 
     const particleMaterial = new THREE.PointsMaterial({
-      size: 0.14,
+      size: isLowEnd ? 0.18 : 0.14,
       map: particleTexture,
       vertexColors: true,
       transparent: true,
@@ -223,7 +232,7 @@ export default function HeroThreeScene() {
     const particles = new THREE.Points(particleGeo, particleMaterial);
     scene.add(particles);
 
-    // 8. Mouse Parallax & Interaction
+    // 8. Mouse Parallax & Interaction (Skip heavy mouse listener if mobile)
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
@@ -237,14 +246,25 @@ export default function HeroThreeScene() {
       mouseY = y * 0.8;
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    if (!isMobile) {
+      window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    }
 
-    // 9. Render Loop
+    // 9. Intersection Observer: Stop render loop when Hero is not visible
+    let isSceneVisible = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      isSceneVisible = entry.isIntersecting;
+    }, { threshold: 0.05 });
+    observer.observe(container);
+
+    // 10. Render Loop
     let animationFrameId;
     let clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+      if (!isSceneVisible) return; // Completely pause calculations when scrolled away
+
       const elapsed = clock.getElapsedTime();
 
       // Smooth mouse damping
@@ -269,12 +289,10 @@ export default function HeroThreeScene() {
       // Drifting particles motion
       const posArr = particles.geometry.attributes.position.array;
       for (let i = 0; i < particleCount; i++) {
-        // Slow vertical ascent
         posArr[i * 3 + 1] += 0.008;
         if (posArr[i * 3 + 1] > 6) {
           posArr[i * 3 + 1] = -6;
         }
-        // Slight harmonic sway
         posArr[i * 3] += Math.sin(elapsed + i) * 0.002;
       }
       particles.geometry.attributes.position.needsUpdate = true;
@@ -290,13 +308,12 @@ export default function HeroThreeScene() {
 
     animate();
 
-    // 10. Handle Resize
+    // 11. Handle Resize
     const handleResize = () => {
       if (!container) return;
       const width = container.clientWidth;
       const height = container.clientHeight;
       camera.aspect = width / height;
-      // Adjust camera distance for mobile screens
       if (width < 640) {
         camera.position.z = 10.5;
       } else {
@@ -306,17 +323,23 @@ export default function HeroThreeScene() {
       renderer.setSize(width, height);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
     handleResize();
 
-    // 11. Cleanup
+    // 12. Cleanup
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      if (!isMobile) {
+        window.removeEventListener('mousemove', handleMouseMove);
+      }
       window.removeEventListener('resize', handleResize);
+      observer.disconnect();
       cancelAnimationFrame(animationFrameId);
       if (container && renderer.domElement) {
         container.removeChild(renderer.domElement);
       }
+      particleGeo.dispose();
+      particleMaterial.dispose();
+      particleTexture.dispose();
       renderer.dispose();
     };
   }, []);

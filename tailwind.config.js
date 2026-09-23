@@ -32,7 +32,10 @@ export default {
         }
       },
       fontFamily: {
-        display: ['"Rozha One"', '"Cinzel Decorative"', 'serif'],
+        nuv: ['"Cinzel Decorative"', 'serif'],
+        khelaiya: ['"Khand"', 'sans-serif'],
+        khand: ['"Khand"', 'sans-serif'],
+        display: ['"Rozha One"', '"Yatra One"', '"Cinzel Decorative"', 'serif'],
         royal: ['"Cinzel"', 'serif'],
         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
       },

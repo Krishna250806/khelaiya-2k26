@@ -4,9 +4,10 @@ import { ArrowRight, Sparkles, Compass, MapPin } from 'lucide-react';
 import HeroThreeScene from './HeroThreeScene';
 import { FESTIVAL_INFO } from '../data/festivalData';
 import { DiyaIcon, ToranBorder } from './common/MandalaDecorations';
+import CountdownTimer from './common/CountdownTimer';
 
 export default function HeroSection({ onRegisterClick }) {
-  const titleLetters = "KHELAIYA".split("");
+  const titleLetters = ["खे", "लै", "या"];
 
   return (
     <section className="relative min-h-[90vh] sm:min-h-screen w-full flex flex-col justify-between items-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -19,16 +20,33 @@ export default function HeroSection({ onRegisterClick }) {
         <ToranBorder />
       </div>
 
-      {/* 3. Subtle Radial Gradient Ambience */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] rounded-full bg-radial from-[#febf4a]/15 via-[#5f1040]/25 to-transparent blur-3xl pointer-events-none" />
+      {/* 3. Hanging Auspicious Toran Banners (Asset 3) Anchored to Screen Edges */}
+      {/* Left Hanging Toran */}
+      <div className="absolute top-0 left-0 sm:left-1 lg:left-2 w-14 sm:w-24 md:w-36 lg:w-44 xl:w-52 pointer-events-none z-30 animate-toran-sway">
+        {/* Ornate Gold Hanging Bracket */}
+        <div className="w-8 sm:w-16 h-1.5 sm:h-2.5 mx-auto bg-gradient-to-r from-[#febf4a]/60 via-[#ffd982] to-[#febf4a]/60 rounded-b shadow-[0_2px_8px_rgba(254,191,74,0.6)] border-b border-[#febf4a]" />
+        <img
+          src="/nuv-assets/Asset 3.svg"
+          alt="Auspicious Toran Hanging"
+          className="w-full h-auto filter drop-shadow-[0_8px_25px_rgba(0,0,0,0.6)] brightness-105"
+        />
+      </div>
 
-      {/* Decorative NUV Corner Assets */}
-      <div className="absolute top-24 left-4 sm:left-10 w-24 sm:w-36 opacity-15 pointer-events-none hidden md:block">
-        <img src="/nuv-assets/Asset 1.svg" alt="" className="w-full h-auto" />
+      {/* Right Hanging Toran */}
+      <div 
+        className="absolute top-0 right-0 sm:right-1 lg:right-2 w-14 sm:w-24 md:w-36 lg:w-44 xl:w-52 pointer-events-none z-30 animate-toran-sway"
+        style={{ animationDelay: '2.5s' }}
+      >
+        {/* Ornate Gold Hanging Bracket */}
+        <div className="w-8 sm:w-16 h-1.5 sm:h-2.5 mx-auto bg-gradient-to-r from-[#febf4a]/60 via-[#ffd982] to-[#febf4a]/60 rounded-b shadow-[0_2px_8px_rgba(254,191,74,0.6)] border-b border-[#febf4a]" />
+        <img
+          src="/nuv-assets/Asset 3.svg"
+          alt="Auspicious Toran Hanging"
+          className="w-full h-auto filter drop-shadow-[0_8px_25px_rgba(0,0,0,0.6)] brightness-105 -scale-x-100"
+        />
       </div>
-      <div className="absolute top-24 right-4 sm:right-10 w-24 sm:w-36 opacity-15 pointer-events-none hidden md:block">
-        <img src="/nuv-assets/Asset 2.svg" alt="" className="w-full h-auto" />
-      </div>
+
+
 
       {/* 4. Main Hero Typography & Content Container */}
       <div className="relative z-20 max-w-5xl mx-auto text-center flex flex-col items-center my-auto">
@@ -52,7 +70,7 @@ export default function HeroSection({ onRegisterClick }) {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-display text-lg sm:text-2xl tracking-[0.3em] text-[#febf4a] font-semibold uppercase mb-1"
+          className="font-nuv text-lg sm:text-2xl tracking-[0.3em] text-[#febf4a] font-bold uppercase mb-1"
         >
           NUV
         </motion.p>
@@ -69,7 +87,7 @@ export default function HeroSection({ onRegisterClick }) {
                 delay: 0.4 + index * 0.08,
                 ease: [0.2, 0.65, 0.3, 0.9],
               }}
-              className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight text-gradient-festive select-none drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)] inline-block"
+              className="font-khelaiya text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-semibold tracking-wide text-gradient-festive select-none drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)] inline-block leading-none"
             >
               {char}
             </motion.span>
@@ -91,18 +109,28 @@ export default function HeroSection({ onRegisterClick }) {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 1.3 }}
-          className="mb-10 inline-flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#5f1040]/80 via-[#27153a]/90 to-[#0f4d5b]/80 border border-[#febf4a]/35 shadow-festive-card backdrop-blur-md text-xs sm:text-sm text-[#fff0c2]/90"
+          className="mb-4 inline-flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-[#5f1040]/80 via-[#27153a]/90 to-[#0f4d5b]/80 border border-[#febf4a]/35 shadow-festive-card backdrop-blur-md text-xs sm:text-sm text-[#fff0c2]/90"
         >
           <div className="flex items-center gap-1.5 text-[#febf4a] font-semibold">
             <MapPin className="w-4 h-4 text-[#febf4a]" />
-            <span>Navrachana University Campus</span>
+            <span>Jyoti Party Plot</span>
           </div>
           <span className="text-[#febf4a]/50 hidden sm:inline">•</span>
           <span className="text-[#fff0c2]/80">Vadodara, Gujarat</span>
           <span className="text-[#febf4a]/50 hidden sm:inline">•</span>
           <span className="px-2.5 py-0.5 rounded-full bg-[#febf4a]/20 border border-[#febf4a]/40 text-[#febf4a] font-bold text-[11px] uppercase tracking-wider">
-            Date To Be Announced
+            {FESTIVAL_INFO.date}
           </span>
+        </motion.div>
+
+        {/* Live Countdown Timer */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
+          className="w-full mb-8"
+        >
+          <CountdownTimer />
         </motion.div>
 
         {/* Action CTAs */}
@@ -129,7 +157,7 @@ export default function HeroSection({ onRegisterClick }) {
             className="w-full sm:w-auto px-7 py-4 rounded-full border border-[#febf4a]/50 bg-[#0f4d5b]/60 hover:bg-[#0f4d5b] text-[#febf4a] font-semibold text-xs sm:text-sm tracking-wider uppercase backdrop-blur-md hover:border-[#febf4a] transition-all flex items-center justify-center gap-2.5"
           >
             <Compass className="w-4 h-4" />
-            <span>Discover Khelaiya</span>
+            <span>Discover <span className="font-khelaiya text-base sm:text-lg">खेलैया</span></span>
           </a>
         </motion.div>
 

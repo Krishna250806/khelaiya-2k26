@@ -44,22 +44,23 @@ export default function Navbar({ onRegisterClick, onReopenDoors }) {
           <a 
             href="#" 
             className="flex items-center gap-3 group focus:outline-none"
-            aria-label="NUV Khelaiya Home"
+            aria-label="NUV खेलैया Home"
           >
-            <div className="relative w-10 h-10 rounded-full border border-[#febf4a]/60 bg-gradient-to-br from-[#5f1040] to-[#0f4d5b] flex items-center justify-center shadow-gold-glow group-hover:scale-105 transition-transform overflow-hidden p-1">
+            <div className="relative w-10 h-10 rounded-full border border-[#febf4a]/70 bg-gradient-to-br from-[#5f1040] via-[#2a061b] to-[#0f4d5b] flex items-center justify-center shadow-gold-glow group-hover:scale-105 transition-transform overflow-hidden p-1">
               <img 
-                src="/nuv-assets/Asset 5.png" 
-                alt="NUV Logo" 
-                className="w-full h-full object-contain"
+                src="/nuv-assets/asset4_durga.svg" 
+                alt="Maa Ambe" 
+                className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_2px_4px_rgba(254,191,74,0.5)]"
               />
             </div>
             
             <div className="flex flex-col">
-              <span className="font-display text-xl sm:text-2xl font-bold tracking-wider text-gradient-gold">
-                NUV KHELAIYA
+              <span className="text-xl sm:text-2xl font-bold tracking-wider text-gradient-gold">
+                <span className="font-nuv font-bold">NUV </span>
+                <span className="font-khelaiya text-2xl sm:text-3xl">खेलैया</span>
               </span>
               <span className="text-[9px] uppercase tracking-[0.25em] text-[#fff0c2]/70 font-semibold -mt-1">
-                Navrachana University
+                NAVRATRI 2026 • VADODARA
               </span>
             </div>
           </a>

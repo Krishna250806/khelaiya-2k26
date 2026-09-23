@@ -1,12 +1,29 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowRight, Sparkles, X, CheckCircle2, Handshake } from 'lucide-react';
+import { Phone, PhoneCall, Sparkles, X, Crown, Shield, Music, Radio, Coffee, Gem, Utensils, Tv } from 'lucide-react';
 import SectionHeading from './common/SectionHeading';
+import FestiveCardBorder from './common/FestiveCardBorder';
+import { SPONSORS_DATA, OUTREACH_CONTACTS } from '../data/festivalData';
 import { DiyaIcon } from './common/MandalaDecorations';
+
+// Map sponsor icon types
+const ICON_MAP = {
+  "title-1": Crown,
+  "title-2": Sparkles,
+  "other-1": Music,
+  "other-2": Radio,
+  "other-3": Coffee,
+  "other-4": Sparkles,
+  "other-5": Gem,
+  "other-6": Shield,
+  "other-7": Utensils,
+  "other-8": Tv,
+};
 
 export default function SponsorsSection() {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [submittedInquiry, setSubmittedInquiry] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   const handleInquirySubmit = (e) => {
     e.preventDefault();
@@ -17,9 +34,17 @@ export default function SponsorsSection() {
     }, 2200);
   };
 
+  const titleSponsors = SPONSORS_DATA?.titleSponsors || [];
+  const otherSponsors = SPONSORS_DATA?.otherSponsors || [];
+  // Duplicate for seamless 0% -> -50% infinite scroll
+  const marqueeList = [...otherSponsors, ...otherSponsors];
+
   return (
     <section id="sponsors" className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-[#0c2e36] via-[#24061a] to-[#210314]">
       
+      {/* Background Ambience */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-radial-gold opacity-10 pointer-events-none blur-3xl" />
+
       <div className="relative max-w-7xl mx-auto z-10">
         
         {/* Section Heading */}
@@ -27,120 +52,236 @@ export default function SponsorsSection() {
           badge="Partnerships"
           title="OUR"
           highlight="SPONSORS"
-          subtitle="Proudly supported by partners who celebrate student culture and creativity."
+          subtitle="Proudly supported by esteemed patrons and partners celebrating the royal spirit of Garba."
         />
 
-        {/* Brand Partner Card */}
-        <div className="max-w-4xl mx-auto">
-          <div className="relative rounded-3xl p-1 bg-gradient-to-r from-[#febf4a]/50 via-[#5f1040]/70 to-[#0f4d5b]/60 shadow-festive-card backdrop-blur-xl">
-            <div className="rounded-[22px] bg-gradient-to-br from-[#2a061b] via-[#3a0826] to-[#072b33] p-8 sm:p-12 text-center">
-              
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#febf4a]/20 to-[#5f1040]/40 border border-[#febf4a]/50 flex items-center justify-center mx-auto mb-6 text-[#febf4a]">
-                <Handshake className="w-8 h-8" />
-              </div>
-
-              <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-3">
-                Partner with NUV Khelaiya
-              </h3>
-
-              <p className="text-sm sm:text-base text-[#fff0c2]/85 max-w-xl mx-auto mb-8 leading-relaxed">
-                Brand collaborations and event sponsorships for NUV Khelaiya are currently open. Connect with thousands of engaged university students and the wider Navrachana University community.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button
-                  type="button"
-                  onClick={() => setInquiryModalOpen(true)}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#febf4a] via-[#ffd982] to-[#febf4a] text-[#3a0826] font-bold text-xs sm:text-sm uppercase tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <Mail className="w-4 h-4" />
-                  <span>BECOME A SPONSOR</span>
-                </button>
-
-                <a
-                  href="mailto:khelaiya@nuv.ac.in"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-full border border-[#febf4a]/40 text-[#febf4a] hover:bg-[#5f1040]/50 font-semibold text-xs sm:text-sm uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
-                >
-                  <span>Contact Sponsorship Desk</span>
-                </a>
-              </div>
-
-            </div>
+        {/* ======================================================= */}
+        {/* 1. TITLE SPONSORS (2 Featured Cards)                    */}
+        {/* ======================================================= */}
+        <div className="mb-20">
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#febf4a]/60" />
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-[#febf4a] flex items-center gap-2">
+              <Crown className="w-4 h-4 text-[#febf4a]" />
+              <span>TITLE SPONSORS</span>
+            </span>
+            <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#febf4a]/60" />
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            {titleSponsors.map((sponsor, idx) => (
+              <motion.div
+                key={sponsor.id}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
+                whileHover={{ y: -6 }}
+                className="group relative rounded-3xl p-[1.5px] bg-gradient-to-br from-[#febf4a] via-[#ffd982]/60 to-[#5f1040] shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300"
+              >
+                <div className="h-full rounded-[22px] bg-gradient-to-br from-[#330520] via-[#24061a] to-[#0a232b] p-6 sm:p-8 flex items-center justify-center relative overflow-hidden">
+                  
+                  {/* Ornate Corner Accents */}
+                  <div className="absolute top-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
+                  <div className="absolute top-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
+                  <div className="absolute bottom-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
+                  <div className="absolute bottom-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
+
+                  {/* Brand Logo Only (No text inside card) */}
+                  <div className="w-full max-w-[240px] sm:max-w-[260px] aspect-square rounded-2xl bg-white p-4 sm:p-6 flex items-center justify-center shadow-lg border border-[#febf4a]/50 group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
+                    <img
+                      src={sponsor.logo}
+                      alt="Title Sponsor"
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ======================================================= */}
+        {/* 2. TORAN TYPE SPONSOR LIST (Moving Sideways Infinitely)  */}
+        {/* ======================================================= */}
+        <div className="mb-20">
+          
+          {/* Toran Header Swag */}
+          <div className="text-center mb-6">
+            <span className="inline-block text-xs font-bold uppercase tracking-[0.25em] text-[#febf4a] px-4 py-1.5 rounded-full bg-[#5f1040]/70 border border-[#febf4a]/30">
+              ASSOCIATE & EVENT PARTNERS
+            </span>
+          </div>
+
+          {/* Toran Hanging Architecture Container */}
+          <div 
+            className="relative w-full overflow-hidden py-6 select-none group"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
+            {/* The Top Hanging Golden Toran String with Decorative Marigold Beads */}
+            <div className="absolute top-2 left-0 right-0 h-3 z-20 pointer-events-none flex items-center justify-between px-2">
+              <div className="w-full h-[2px] bg-gradient-to-r from-[#febf4a]/20 via-[#febf4a] to-[#febf4a]/20 shadow-[0_0_10px_rgba(254,191,74,0.8)]" />
+            </div>
+
+            {/* Left & Right Gradient Shadows for Seamless Fade In/Out */}
+            <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#0c2e36] via-[#0c2e36]/80 to-transparent z-20 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#210314] via-[#210314]/80 to-transparent z-20 pointer-events-none" />
+
+            {/* Moving Marquee Track */}
+            <div
+              className="flex items-start gap-6 w-max animate-marquee"
+              style={{
+                animationPlayState: isPaused ? 'paused' : 'running',
+              }}
+            >
+              {marqueeList.map((sponsor, index) => {
+                const IconComponent = ICON_MAP[sponsor.id] || Sparkles;
+                return (
+                  <div
+                    key={`${sponsor.id}-${index}`}
+                    className="relative flex flex-col items-center cursor-pointer transition-transform duration-300 hover:-translate-y-2"
+                  >
+                    {/* Hanging String & Toran Brass Bell/Bead */}
+                    <div className="flex flex-col items-center mb-1">
+                      <div className="w-[1.5px] h-4 bg-gradient-to-b from-[#febf4a] to-[#ffd982]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffd982] border border-[#febf4a] shadow-sm -mt-0.5" />
+                    </div>
+
+                    {/* Toran Leaf / Pennant Card */}
+                    <div className="w-64 sm:w-72 rounded-2xl p-[1px] bg-gradient-to-b from-[#febf4a]/60 via-[#5f1040]/50 to-[#0f4d5b]/40 hover:from-[#febf4a] hover:to-[#ffd982] hover:shadow-gold-glow transition-all duration-300">
+                      <div className="rounded-[15px] bg-gradient-to-b from-[#3a0826] via-[#250417] to-[#0a232b] p-5 text-center relative overflow-hidden flex flex-col items-center">
+                        
+                        {/* Toran Top Arch Accent */}
+                        <div className="w-12 h-1 bg-gradient-to-r from-transparent via-[#febf4a] to-transparent rounded-full mb-3" />
+
+                        {/* Partner Category Icon */}
+                        <div className="w-11 h-11 rounded-full bg-[#febf4a]/15 border border-[#febf4a]/50 text-[#febf4a] flex items-center justify-center mb-3 shadow-inner">
+                          <IconComponent className="w-5 h-5 text-[#febf4a]" />
+                        </div>
+
+                        {/* Partner Name */}
+                        <h5 className="font-display text-lg sm:text-xl font-bold text-white mb-1 tracking-wide group-hover:text-[#febf4a]">
+                          {sponsor.name}
+                        </h5>
+
+                        {/* Partner Role / Badge */}
+                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#febf4a]/90 px-3 py-0.5 rounded-full bg-[#5f1040]/70 border border-[#febf4a]/30 mt-1">
+                          {sponsor.role}
+                        </span>
+
+                        {/* Hanging Tassel Triangle at Bottom of Toran Card */}
+                        <div className="mt-4 flex flex-col items-center">
+                          <div className="w-4 h-2 bg-gradient-to-b from-[#febf4a]/60 to-transparent [clip-path:polygon(50%_100%,0_0,100%_0)]" />
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                );
+              })}
+            </div>
+
+            <p className="text-center text-[11px] text-[#fff0c2]/50 italic mt-4">
+              ✦ Hover to pause toran scroll • Click to inquire ✦
+            </p>
+          </div>
+        </div>
+
+        {/* ======================================================= */}
+        {/* 3. ONLY ONE BUTTON TO CONTACT FOR SPONSORSHIP ENQUIRY   */}
+        {/* ======================================================= */}
+        <div className="text-center max-w-xl mx-auto">
+          <button
+            type="button"
+            onClick={() => setInquiryModalOpen(true)}
+            className="w-full sm:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-[#febf4a] via-[#ffd982] to-[#febf4a] text-[#3a0826] font-display font-bold text-sm uppercase tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg hover:scale-105 transition-all flex items-center justify-center gap-3 mx-auto cursor-pointer"
+          >
+            <PhoneCall className="w-4 h-4 text-[#3a0826]" />
+            <span>CONTACT FOR SPONSORSHIP ENQUIRY</span>
+          </button>
         </div>
 
       </div>
 
-      {/* Sponsor Inquiry Modal */}
+      {/* Sponsor Inquiry Modal - Direct Outreach Head Contacts */}
       <AnimatePresence>
         {inquiryModalOpen && (
           <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 backdrop-blur-xl bg-black/80">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="relative w-full max-w-md bg-gradient-to-b from-[#250417] to-[#0f4d5b] border-2 border-[#febf4a]/50 rounded-3xl p-6 sm:p-8 shadow-2xl"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ duration: 0.25 }}
+              className="relative w-full max-w-md bg-gradient-to-b from-[#2a061b] via-[#3a0826] to-[#0f4d5b] border-2 border-[#febf4a]/60 rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
             >
               <button
                 onClick={() => setInquiryModalOpen(false)}
-                className="absolute top-5 right-5 p-2 rounded-full border border-[#febf4a]/30 text-[#febf4a] hover:bg-[#5f1040]"
+                className="absolute top-4 right-4 p-2 rounded-full border border-[#febf4a]/30 text-[#febf4a] hover:bg-[#5f1040] transition-colors cursor-pointer"
+                aria-label="Close"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-2">
                 <DiyaIcon className="w-7 h-7 text-[#febf4a]" />
                 <h3 className="font-display text-2xl font-bold text-gradient-gold">
-                  Sponsorship Inquiry
+                  Sponsorship Enquiry
                 </h3>
               </div>
 
-              <p className="text-xs text-[#fff0c2]/80 mb-6">
-                Submit your details and the NUV Khelaiya partnership team will reach out to discuss collaboration opportunities.
+              <p className="text-xs text-[#fff0c2]/80 mb-6 leading-relaxed">
+                Connect directly with our <strong>Outreach Team Heads</strong> to discuss title partnerships, stalls, and brand associations for <strong>NUV खेलैया 2026</strong>:
               </p>
 
-              {submittedInquiry ? (
-                <div className="text-center py-6">
-                  <CheckCircle2 className="w-10 h-10 text-[#febf4a] mx-auto mb-2" />
-                  <h4 className="font-display text-lg font-bold text-white">Inquiry Received</h4>
-                  <p className="text-xs text-[#fff0c2]/80 mt-1">Thank you. The NUV Khelaiya team will get back to you shortly.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleInquirySubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-[#fff0c2]/90 mb-1">Company / Organization</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Your organization name"
-                      className="w-full px-4 py-2 rounded-xl bg-[#1a0210] border border-[#febf4a]/30 text-white text-sm focus:outline-none focus:border-[#febf4a]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-[#fff0c2]/90 mb-1">Contact Person & Email</label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="contact@company.com"
-                      className="w-full px-4 py-2 rounded-xl bg-[#1a0210] border border-[#febf4a]/30 text-white text-sm focus:outline-none focus:border-[#febf4a]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-[#fff0c2]/90 mb-1">Phone Number</label>
-                    <input
-                      type="tel"
-                      placeholder="+91 Phone number"
-                      className="w-full px-4 py-2 rounded-xl bg-[#1a0210] border border-[#febf4a]/30 text-white text-sm focus:outline-none focus:border-[#febf4a]"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full py-3 rounded-full bg-gradient-to-r from-[#febf4a] to-[#ffd982] text-[#3a0826] font-bold text-xs uppercase tracking-wider shadow-gold-glow cursor-pointer"
+              <div className="space-y-3.5">
+                {OUTREACH_CONTACTS.map((head) => (
+                  <div 
+                    key={head.name} 
+                    className="p-3.5 rounded-2xl bg-[#170310]/90 border border-[#febf4a]/35 flex items-center justify-between gap-3 hover:border-[#febf4a] transition-all"
                   >
-                    Submit Sponsorship Inquiry
-                  </button>
-                </form>
-              )}
+                    <div className="flex items-center gap-3 min-w-0">
+                      <img 
+                        src={head.image} 
+                        alt={head.name} 
+                        className="w-12 h-12 rounded-full object-cover border border-[#febf4a]/50 flex-shrink-0"
+                      />
+                      <div className="min-w-0">
+                        <h4 className="font-display text-sm sm:text-base font-bold text-white truncate">
+                          {head.name}
+                        </h4>
+                        <span className="text-[10px] uppercase tracking-wider text-[#febf4a] font-semibold block">
+                          {head.designation}
+                        </span>
+                        <a 
+                          href={`tel:${head.phone.replace(/\s+/g, '')}`} 
+                          className="text-xs text-[#ffd982] hover:underline font-mono mt-0.5 inline-block"
+                        >
+                          {head.phone}
+                        </a>
+                      </div>
+                    </div>
+
+                    <a
+                      href={`tel:${head.phone.replace(/\s+/g, '')}`}
+                      className="px-3.5 py-2 rounded-full bg-gradient-to-r from-[#febf4a] to-[#ffd982] text-[#3a0826] font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-sm hover:scale-105 transition-all flex-shrink-0"
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                      <span>Call</span>
+                    </a>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-[#febf4a]/20 text-center">
+                <span className="text-[11px] text-[#fff0c2]/60">
+                  Event Venue: Jyoti Party Plot • Vadodara, Gujarat
+                </span>
+              </div>
             </motion.div>
           </div>
         )}

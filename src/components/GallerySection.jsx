@@ -33,6 +33,11 @@ export default function GallerySection() {
   return (
     <section id="gallery" className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-[#0c2e36] via-[#24061a] to-[#210314]">
       
+      {/* Hanging Festive Jhumka Chandelier Accent (Asset 4) */}
+      <div className="absolute top-16 right-6 lg:right-16 w-14 lg:w-20 pointer-events-none hidden md:block opacity-85 animate-float z-20">
+        <img src="/nuv-assets/asset4_jhumka.svg" alt="Festive Jhumka" className="w-full h-auto filter drop-shadow-[0_4px_15px_rgba(254,191,74,0.4)] brightness-110" />
+      </div>
+
       <div className="relative max-w-7xl mx-auto z-10">
         
         {/* Section Heading */}
@@ -40,7 +45,7 @@ export default function GallerySection() {
           badge="Gallery"
           title="THE"
           highlight="MOMENTS"
-          subtitle="Captured in rhythm. Captured at NUV Khelaiya."
+          subtitle="Captured in rhythm. Captured at NUV खेलैया."
         />
 
         {/* Editorial Responsive Image Grid */}
@@ -74,7 +79,7 @@ export default function GallerySection() {
               {/* Title Strip */}
               <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#febf4a] block mb-1">
-                  NUV Khelaiya
+                  NUV खेलैया
                 </span>
                 <h4 className="font-display text-lg font-bold text-white group-hover:text-[#febf4a] transition-colors">
                   {item.title}
@@ -140,7 +145,7 @@ export default function GallerySection() {
                 <div className="p-5 bg-gradient-to-r from-[#250417] via-[#3a0826] to-[#0f4d5b] border-t border-[#febf4a]/30 flex items-center justify-between">
                   <div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#febf4a] block">
-                      NUV Khelaiya
+                      NUV खेलैया
                     </span>
                     <h4 className="font-display text-xl font-bold text-white">
                       {GALLERY_ITEMS[selectedImageIndex].title}
