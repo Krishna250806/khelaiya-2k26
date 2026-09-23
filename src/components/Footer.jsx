@@ -57,7 +57,7 @@ export default function Footer({ onRegisterClick }) {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-[#fff0c2]/80">
               <li><a href="#about" className="hover:text-[#febf4a] transition-colors">About NUV खेलैया</a></li>
-              <li><a href="#event" className="hover:text-[#febf4a] transition-colors">The Experience</a></li>
+              <li><a href="#organizer" className="hover:text-[#febf4a] transition-colors">Organized By</a></li>
               <li><a href="#registration" className="hover:text-[#febf4a] transition-colors">Registration</a></li>
               <li><a href="#sponsors" className="hover:text-[#febf4a] transition-colors">Our Sponsors</a></li>
               <li><a href="#team" className="hover:text-[#febf4a] transition-colors">Organizing Team</a></li>

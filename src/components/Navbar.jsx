@@ -22,7 +22,7 @@ export default function Navbar({ onRegisterClick, onReopenDoors }) {
 
   const navLinks = [
     { name: "ABOUT", href: "#about" },
-    { name: "EVENT", href: "#event" },
+    { name: "ORGANIZERS", href: "#organizer" },
     { name: "SPONSORS", href: "#sponsors" },
     { name: "TEAM", href: "#team" },
     { name: "GALLERY", href: "#gallery" },

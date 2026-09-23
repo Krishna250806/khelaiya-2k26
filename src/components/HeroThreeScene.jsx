@@ -66,16 +66,18 @@ export default function HeroThreeScene() {
       roughness: 0.22,
     });
 
-    const maroonMaterial = new THREE.MeshStandardMaterial({
-      color: 0x5f1040,
-      metalness: 0.4,
-      roughness: 0.45,
+    // Bright Festive Red Material (Theme Color)
+    const brightRedMaterial = new THREE.MeshStandardMaterial({
+      color: 0xef233c,
+      metalness: 0.35,
+      roughness: 0.3,
     });
 
-    const tealMaterial = new THREE.MeshStandardMaterial({
-      color: 0x0f4d5b,
-      metalness: 0.6,
-      roughness: 0.35,
+    // Bright Festive Bluish / Turquoise Material (Theme Color)
+    const brightBlueMaterial = new THREE.MeshStandardMaterial({
+      color: 0x0284c7,
+      metalness: 0.45,
+      roughness: 0.28,
     });
 
     const pearlMaterial = new THREE.MeshStandardMaterial({
@@ -85,12 +87,12 @@ export default function HeroThreeScene() {
     });
 
     // Helper to create one single ornate dandiya stick
-    const createDandiyaStick = () => {
+    const createDandiyaStick = (shaftMat, accentMat) => {
       const stick = new THREE.Group();
 
       // Main shaft (Cylinder)
       const shaftGeo = new THREE.CylinderGeometry(0.1, 0.1, 4.4, 32);
-      const shaft = new THREE.Mesh(shaftGeo, maroonMaterial);
+      const shaft = new THREE.Mesh(shaftGeo, shaftMat);
       stick.add(shaft);
 
       // Gold spiral / decorative rings along the shaft
@@ -102,9 +104,9 @@ export default function HeroThreeScene() {
         stick.add(ring);
       }
 
-      // Middle grip band (Teal accent)
+      // Middle grip band with contrasting festive accent
       const gripGeo = new THREE.CylinderGeometry(0.105, 0.105, 0.8, 32);
-      const grip = new THREE.Mesh(gripGeo, tealMaterial);
+      const grip = new THREE.Mesh(gripGeo, accentMat);
       grip.position.y = 0;
       stick.add(grip);
 
@@ -131,47 +133,19 @@ export default function HeroThreeScene() {
       return stick;
     };
 
-    // Stick 1
-    const stick1 = createDandiyaStick();
+    // Stick 1: Bright Festive Red with Bluish Accent
+    const stick1 = createDandiyaStick(brightRedMaterial, brightBlueMaterial);
     stick1.rotation.z = Math.PI / 4.5;
     stick1.position.z = 0.2;
     dandiyaGroup.add(stick1);
 
-    // Stick 2 (Crossed)
-    const stick2 = createDandiyaStick();
+    // Stick 2 (Crossed): Bright Festive Bluish with Red Accent
+    const stick2 = createDandiyaStick(brightBlueMaterial, brightRedMaterial);
     stick2.rotation.z = -Math.PI / 4.5;
     stick2.position.z = -0.2;
     dandiyaGroup.add(stick2);
 
     scene.add(dandiyaGroup);
-
-    // 6. Spinning Concentric 3D Mandala Halo Rings Behind
-    const haloGroup = new THREE.Group();
-
-    // Outer intricate ring
-    const ring1Geo = new THREE.TorusGeometry(2.8, 0.03, 16, 100);
-    const ring1 = new THREE.Mesh(ring1Geo, goldMaterial);
-    haloGroup.add(ring1);
-
-    // Inner patterned ring
-    const ring2Geo = new THREE.TorusGeometry(2.2, 0.02, 16, 80);
-    const ring2 = new THREE.Mesh(ring2Geo, goldMaterial);
-    haloGroup.add(ring2);
-
-    // Radial spokes on the mandala ring
-    const spokeCount = 12;
-    for (let i = 0; i < spokeCount; i++) {
-      const angle = (i / spokeCount) * Math.PI * 2;
-      const spokeGeo = new THREE.CylinderGeometry(0.015, 0.015, 0.6, 8);
-      const spoke = new THREE.Mesh(spokeGeo, goldMaterial);
-      spoke.position.x = Math.cos(angle) * 2.5;
-      spoke.position.y = Math.sin(angle) * 2.5;
-      spoke.rotation.z = angle + Math.PI / 2;
-      haloGroup.add(spoke);
-    }
-
-    haloGroup.position.z = -0.8;
-    scene.add(haloGroup);
 
     // 7. Golden Festive Sparkle Particle System (Embers / Confetti)
     // Low-end devices use fewer particles to conserve memory and fill rate
@@ -280,11 +254,6 @@ export default function HeroThreeScene() {
       // Individual stick gentle clashing rhythm
       stick1.rotation.z = (Math.PI / 4.5) + Math.sin(elapsed * 2.2) * 0.08;
       stick2.rotation.z = (-Math.PI / 4.5) - Math.sin(elapsed * 2.2) * 0.08;
-
-      // Rotate Mandala Halo
-      haloGroup.rotation.z = elapsed * 0.12;
-      haloGroup.rotation.x = targetY * 0.3;
-      haloGroup.rotation.y = targetX * 0.3;
 
       // Drifting particles motion
       const posArr = particles.geometry.attributes.position.array;

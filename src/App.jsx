@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DoorLoader from './components/DoorLoader';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -13,9 +13,25 @@ import ScheduleFaqSection from './components/ScheduleFaqSection';
 import Footer from './components/Footer';
 
 export default function App() {
-  const [doorsOpen, setDoorsOpen] = useState(false);
+  // Check if user has previously opened doors or was at a specific section on refresh
+  const [doorsOpen, setDoorsOpen] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const hasOpened = sessionStorage.getItem('nuv_doors_opened') === 'true';
+      const hasHash = Boolean(window.location.hash);
+      const lastSection = sessionStorage.getItem('nuv_last_section');
+      return hasOpened || hasHash || Boolean(lastSection);
+    }
+    return false;
+  });
+
+  const handleDoorComplete = () => {
+    sessionStorage.setItem('nuv_doors_opened', 'true');
+    setDoorsOpen(true);
+  };
 
   const handleReopenDoors = () => {
+    sessionStorage.removeItem('nuv_doors_opened');
+    sessionStorage.removeItem('nuv_last_section');
     setDoorsOpen(false);
   };
 
@@ -26,12 +42,87 @@ export default function App() {
     }
   };
 
+  // 1. Restore last visited section or hash on page reload/refresh
+  useEffect(() => {
+    if (!doorsOpen) return;
+
+    const targetSection = window.location.hash.replace('#', '') || sessionStorage.getItem('nuv_last_section');
+    if (targetSection) {
+      const restore = () => {
+        const el = document.getElementById(targetSection);
+        if (el) {
+          el.scrollIntoView({ behavior: 'auto' });
+        }
+      };
+
+      restore();
+      const t1 = setTimeout(restore, 100);
+      const t2 = setTimeout(restore, 400);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+  }, [doorsOpen]);
+
+  // 2. Track current visible section continuously as user scrolls
+  useEffect(() => {
+    if (!doorsOpen) return;
+
+    const sectionIds = [
+      'hero',
+      'about',
+      'organizer',
+      'event',
+      'registration',
+      'sponsors',
+      'team',
+      'gallery',
+      'faq',
+    ];
+
+    let ticking = false;
+
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + 250;
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const id = sectionIds[i];
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollPosition) {
+          sessionStorage.setItem('nuv_last_section', id);
+          if (window.location.hash !== `#${id}`) {
+            window.history.replaceState(null, '', `#${id}`);
+          }
+          break;
+        }
+      }
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveSection);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [doorsOpen]);
+
+  // 3. Clean any search query params on load to prevent form resubmission prompts
+  useEffect(() => {
+    if (window.location.search) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+    }
+  }, []);
+
   return (
     <div className="relative min-h-screen bg-[#210314] text-[#fff0c2] selection:bg-[#febf4a] selection:text-[#3a0826] overflow-x-hidden">
       
       {/* 1. Custom 3D Ornate Door Entry Loader */}
       {!doorsOpen && (
-        <DoorLoader onComplete={() => setDoorsOpen(true)} />
+        <DoorLoader onComplete={handleDoorComplete} />
       )}
 
       {/* 2. Main Festival Experience */}
@@ -50,7 +141,7 @@ export default function App() {
           {/* 4. About NUV खेलैया */}
           <AboutSection />
 
-          {/* 5. Event Highlights */}
+          {/* 5. Organized by Cultural Committee */}
           <EventHighlights />
 
           {/* 6. Join NUV खेलैया Registration Section */}
