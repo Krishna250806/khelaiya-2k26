@@ -103,14 +103,6 @@ export default function DoorLoader({ onComplete }) {
           <div className="w-full bg-gradient-to-r from-[#1c0312] via-[#3a0624] to-[#1c0312] border-b-4 border-[#febf4a]/70 shadow-[0_8px_30px_rgba(0,0,0,0.95)] px-4 py-2 sm:py-3 flex flex-col items-center relative overflow-hidden">
             {/* Lintel Carved Pattern */}
             <div className="absolute inset-0 opacity-15 bg-[repeating-linear-gradient(45deg,#febf4a,#febf4a_4px,transparent_4px,transparent_14px)] pointer-events-none" />
-            
-            <div className="flex items-center gap-2 sm:gap-6 py-1 px-3 sm:px-8 rounded-full bg-[#15020d]/90 border border-[#febf4a]/50 shadow-md max-w-full">
-              <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#febf4a] animate-pulse flex-shrink-0" />
-              <span className="text-[9px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.15em] sm:tracking-[0.35em] text-[#fed575] drop-shadow truncate">
-                JYOTI PARTY PLOT • NAVRATRI 2026
-              </span>
-              <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#febf4a] animate-pulse flex-shrink-0" />
-            </div>
 
             {/* Hanging Toran Garland Swag across top of doors */}
             <div className="w-full flex items-center justify-around pt-1.5 opacity-90">
