@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Sparkles, Bell, Calendar, MapPin, X, CheckCircle2 } from 'lucide-react';
 import SectionHeading from './common/SectionHeading';
@@ -8,6 +9,39 @@ import { DiyaIcon, MandalaPattern } from './common/MandalaDecorations';
 
 export default function RegistrationSection({ onRegisterClick }) {
   const [alertModalOpen, setAlertModalOpen] = useState(false);
+
+  // Prevent background scroll on iOS and desktop when modal is active
+  useEffect(() => {
+    if (alertModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [alertModalOpen]);
+
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setAlertModalOpen(false);
+      }
+    };
+    if (alertModalOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [alertModalOpen]);
+
+  const closeAlertModal = (e) => {
+    if (e) {
+      if (typeof e.preventDefault === 'function') e.preventDefault();
+      if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    }
+    setAlertModalOpen(false);
+  };
 
   const handleRegisterTrigger = (e) => {
     e.preventDefault();
@@ -90,61 +124,76 @@ export default function RegistrationSection({ onRegisterClick }) {
 
       </div>
 
-      {/* Registration Starting Soon Festive Modal Alert */}
-      <AnimatePresence>
-        {alertModalOpen && (
-          <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 backdrop-blur-xl bg-black/80">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.25 }}
-              className="relative w-full max-w-md bg-gradient-to-b from-[#2a061b] via-[#3a0826] to-[#0f4d5b] border-2 border-[#febf4a]/60 rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.9)] text-center overflow-hidden"
+      {/* Registration Starting Soon Festive Modal Alert - Rendered via Portal at document.body for iOS */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {alertModalOpen && (
+            <div 
+              className="fixed inset-0 z-[9999] overflow-y-auto flex items-center justify-center p-4 backdrop-blur-md bg-black/85"
+              onClick={closeAlertModal}
+              onTouchEnd={(e) => {
+                if (e.target === e.currentTarget) {
+                  closeAlertModal(e);
+                }
+              }}
             >
-              {/* Corner Close Button */}
-              <button
-                onClick={() => setAlertModalOpen(false)}
-                className="absolute top-4 right-4 p-2 rounded-full border border-[#febf4a]/30 text-[#febf4a] hover:bg-[#5f1040] transition-colors cursor-pointer"
-                aria-label="Close"
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ duration: 0.2 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-md bg-gradient-to-b from-[#2a061b] via-[#3a0826] to-[#0f4d5b] border-2 border-[#febf4a]/60 rounded-3xl p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.95)] text-center overflow-hidden"
               >
-                <X className="w-5 h-5" />
-              </button>
+                {/* Large iOS-friendly close button with high touch target */}
+                <button
+                  type="button"
+                  onClick={closeAlertModal}
+                  onTouchEnd={closeAlertModal}
+                  className="absolute top-4 right-4 z-50 min-w-[44px] min-h-[44px] rounded-full border border-[#febf4a]/50 bg-[#3a0826] text-[#febf4a] hover:bg-[#5f1040] active:scale-90 flex items-center justify-center transition-all cursor-pointer shadow-lg"
+                  aria-label="Close"
+                >
+                  <X className="w-5 h-5 text-[#febf4a]" />
+                </button>
 
-              {/* Alert Icon */}
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#febf4a]/30 to-[#5f1040]/60 border border-[#febf4a] text-[#febf4a] flex items-center justify-center mx-auto mb-4 shadow-gold-glow">
-                <Bell className="w-8 h-8 animate-bounce" />
-              </div>
+                {/* Alert Icon */}
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#febf4a]/30 to-[#5f1040]/60 border border-[#febf4a] text-[#febf4a] flex items-center justify-center mx-auto mb-4 shadow-gold-glow">
+                  <Bell className="w-8 h-8 animate-bounce" />
+                </div>
 
-              {/* Alert Badge */}
-              <div className="inline-block px-3 py-1 rounded-full bg-[#febf4a]/20 border border-[#febf4a]/50 text-[#febf4a] text-xs font-bold uppercase tracking-widest mb-3">
-                Notice
-              </div>
+                {/* Alert Badge */}
+                <div className="inline-block px-3 py-1 rounded-full bg-[#febf4a]/20 border border-[#febf4a]/50 text-[#febf4a] text-xs font-bold uppercase tracking-widest mb-3">
+                  Notice
+                </div>
 
-              {/* Main Alert Title */}
-              <h4 className="font-display text-2xl sm:text-3xl font-extrabold text-gradient-gold mb-3">
-                Registration Starting Soon!
-              </h4>
+                {/* Main Alert Title */}
+                <h4 className="font-display text-2xl sm:text-3xl font-extrabold text-gradient-gold mb-3">
+                  Registration Starting Soon!
+                </h4>
 
-              <p className="text-sm text-[#fff0c2]/90 leading-relaxed mb-4">
-                Official entry passes and attendee registration for <strong className="text-[#febf4a]">NUV खेलैया 2026</strong> at <strong>Jyoti Party Plot</strong> will go live shortly.
-              </p>
+                <p className="text-sm text-[#fff0c2]/90 leading-relaxed mb-4">
+                  Official entry passes and attendee registration for <strong className="text-[#febf4a]">NUV खेलैया 2026</strong> at <strong>Jyoti Party Plot</strong> will go live shortly.
+                </p>
 
-              <div className="p-3.5 rounded-xl bg-[#12020d]/80 border border-[#febf4a]/30 mb-6 flex items-center justify-center gap-2 text-xs text-[#febf4a] font-medium">
-                <Sparkles className="w-4 h-4 flex-shrink-0" />
-                <span>Stay tuned to this official portal for pass announcements!</span>
-              </div>
+                <div className="p-3.5 rounded-xl bg-[#12020d]/80 border border-[#febf4a]/30 mb-6 flex items-center justify-center gap-2 text-xs text-[#febf4a] font-medium">
+                  <Sparkles className="w-4 h-4 flex-shrink-0" />
+                  <span>Stay tuned to this official portal for pass announcements!</span>
+                </div>
 
-              <button
-                type="button"
-                onClick={() => setAlertModalOpen(false)}
-                className="w-full py-3 rounded-full bg-gradient-to-r from-[#febf4a] to-[#ffd982] text-[#3a0826] font-bold text-sm uppercase tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg transition-all cursor-pointer"
-              >
-                Got It
-              </button>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+                <button
+                  type="button"
+                  onClick={closeAlertModal}
+                  onTouchEnd={closeAlertModal}
+                  className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#febf4a] to-[#ffd982] text-[#3a0826] font-bold text-sm uppercase tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg active:scale-95 transition-all cursor-pointer"
+                >
+                  Got It
+                </button>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
 
     </section>
   );

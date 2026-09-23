@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, PhoneCall, Sparkles, X, Crown, Shield, Music, Radio, Coffee, Gem, Utensils, Tv } from 'lucide-react';
 import SectionHeading from './common/SectionHeading';
@@ -24,6 +25,45 @@ export default function SponsorsSection() {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [submittedInquiry, setSubmittedInquiry] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+
+  // Prevent background scroll on iOS and desktop when modal is active
+  useEffect(() => {
+    if (inquiryModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [inquiryModalOpen]);
+
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setInquiryModalOpen(false);
+      }
+    };
+    if (inquiryModalOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [inquiryModalOpen]);
+
+  // Robust Call handler that works on iOS Safari, Android, and Desktop
+  const handleCall = (phone) => {
+    const cleanPhone = phone.replace(/[^0-9+]/g, '');
+    window.location.href = `tel:${cleanPhone}`;
+  };
+
+  const closeModal = (e) => {
+    if (e) {
+      if (typeof e.preventDefault === 'function') e.preventDefault();
+      if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    }
+    setInquiryModalOpen(false);
+  };
 
   const handleInquirySubmit = (e) => {
     e.preventDefault();
@@ -208,84 +248,121 @@ export default function SponsorsSection() {
 
       </div>
 
-      {/* Sponsor Inquiry Modal - Direct Outreach Head Contacts */}
-      <AnimatePresence>
-        {inquiryModalOpen && (
-          <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 backdrop-blur-xl bg-black/80">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.25 }}
-              className="relative w-full max-w-md bg-gradient-to-b from-[#2a061b] via-[#3a0826] to-[#0f4d5b] border-2 border-[#febf4a]/60 rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
+      {/* Sponsor Inquiry Modal - Rendered via Portal at document.body for iOS fixed positioning */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {inquiryModalOpen && (
+            <div 
+              className="fixed inset-0 z-[9999] overflow-y-auto flex items-center justify-center p-4 backdrop-blur-md bg-black/85"
+              onClick={closeModal}
+              onTouchEnd={(e) => {
+                if (e.target === e.currentTarget) {
+                  closeModal(e);
+                }
+              }}
             >
-              <button
-                onClick={() => setInquiryModalOpen(false)}
-                className="absolute top-4 right-4 p-2 rounded-full border border-[#febf4a]/30 text-[#febf4a] hover:bg-[#5f1040] transition-colors cursor-pointer"
-                aria-label="Close"
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ duration: 0.2 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-md bg-gradient-to-b from-[#2a061b] via-[#3a0826] to-[#0f4d5b] border-2 border-[#febf4a]/60 rounded-3xl p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.95)]"
               >
-                <X className="w-5 h-5" />
-              </button>
+                {/* Large iOS-friendly close button with high touch target */}
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  onTouchEnd={closeModal}
+                  className="absolute top-4 right-4 z-50 min-w-[44px] min-h-[44px] rounded-full border border-[#febf4a]/50 bg-[#3a0826] text-[#febf4a] hover:bg-[#5f1040] active:scale-90 flex items-center justify-center transition-all cursor-pointer shadow-lg"
+                  aria-label="Close"
+                >
+                  <X className="w-5 h-5 text-[#febf4a]" />
+                </button>
 
-              <div className="flex items-center gap-3 mb-2">
-                <DiyaIcon className="w-7 h-7 text-[#febf4a]" />
-                <h3 className="font-display text-2xl font-bold text-gradient-gold">
-                  Sponsorship Enquiry
-                </h3>
-              </div>
+                <div className="flex items-center gap-3 mb-2 pr-10">
+                  <DiyaIcon className="w-7 h-7 text-[#febf4a] flex-shrink-0" />
+                  <h3 className="font-display text-2xl font-bold text-gradient-gold">
+                    Sponsorship Enquiry
+                  </h3>
+                </div>
 
-              <p className="text-xs text-[#fff0c2]/80 mb-6 leading-relaxed">
-                Connect directly with our <strong>Outreach Team Heads</strong> to discuss title partnerships, stalls, and brand associations for <strong>NUV खेलैया 2026</strong>:
-              </p>
+                <p className="text-xs text-[#fff0c2]/80 mb-6 leading-relaxed">
+                  Connect directly with our <strong>Outreach Team Heads</strong> to discuss title partnerships, stalls, and brand associations for <strong>NUV खेलैया 2026</strong>:
+                </p>
 
-              <div className="space-y-3.5">
-                {OUTREACH_CONTACTS.map((head) => (
-                  <div 
-                    key={head.name} 
-                    className="p-3.5 rounded-2xl bg-[#170310]/90 border border-[#febf4a]/35 flex items-center justify-between gap-3 hover:border-[#febf4a] transition-all"
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <img 
-                        src={head.image} 
-                        alt={head.name} 
-                        className="w-12 h-12 rounded-full object-cover border border-[#febf4a]/50 flex-shrink-0"
-                      />
-                      <div className="min-w-0">
-                        <h4 className="font-display text-sm sm:text-base font-bold text-white truncate">
-                          {head.name}
-                        </h4>
-                        <span className="text-[10px] uppercase tracking-wider text-[#febf4a] font-semibold block">
-                          {head.designation}
-                        </span>
-                        <a 
-                          href={`tel:${head.phone.replace(/\s+/g, '')}`} 
-                          className="text-xs text-[#ffd982] hover:underline font-mono mt-0.5 inline-block"
+                <div className="space-y-3.5">
+                  {OUTREACH_CONTACTS.map((head) => {
+                    const cleanPhone = head.phone.replace(/[^0-9+]/g, '');
+                    return (
+                      <div 
+                        key={head.name} 
+                        onClick={() => handleCall(head.phone)}
+                        className="p-3.5 rounded-2xl bg-[#170310]/95 border border-[#febf4a]/35 flex items-center justify-between gap-3 hover:border-[#febf4a] active:bg-[#250417] transition-all cursor-pointer group"
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <img 
+                            src={head.image} 
+                            alt={head.name} 
+                            className="w-12 h-12 rounded-full object-cover border border-[#febf4a]/50 flex-shrink-0"
+                          />
+                          <div className="min-w-0">
+                            <h4 className="font-display text-sm sm:text-base font-bold text-white truncate group-hover:text-[#febf4a] transition-colors">
+                              {head.name}
+                            </h4>
+                            <span className="text-[10px] uppercase tracking-wider text-[#febf4a] font-semibold block">
+                              {head.designation}
+                            </span>
+                            <a 
+                              href={`tel:${cleanPhone}`} 
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCall(head.phone);
+                              }}
+                              className="text-xs text-[#ffd982] hover:underline font-mono mt-0.5 inline-block cursor-pointer"
+                            >
+                              {head.phone}
+                            </a>
+                          </div>
+                        </div>
+
+                        <a
+                          href={`tel:${cleanPhone}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleCall(head.phone);
+                          }}
+                          className="px-4 py-2 rounded-full bg-gradient-to-r from-[#febf4a] to-[#ffd982] text-[#3a0826] font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-md hover:scale-105 active:scale-95 transition-all flex-shrink-0 cursor-pointer"
                         >
-                          {head.phone}
+                          <Phone className="w-3.5 h-3.5 fill-[#3a0826]" />
+                          <span>Call</span>
                         </a>
                       </div>
-                    </div>
+                    );
+                  })}
+                </div>
 
-                    <a
-                      href={`tel:${head.phone.replace(/\s+/g, '')}`}
-                      className="px-3.5 py-2 rounded-full bg-gradient-to-r from-[#febf4a] to-[#ffd982] text-[#3a0826] font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-sm hover:scale-105 transition-all flex-shrink-0"
-                    >
-                      <Phone className="w-3.5 h-3.5" />
-                      <span>Call</span>
-                    </a>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-[#febf4a]/20 text-center">
-                <span className="text-[11px] text-[#fff0c2]/60">
-                  Event Venue: Jyoti Party Plot • Vadodara, Gujarat
-                </span>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+                <div className="mt-6 pt-4 border-t border-[#febf4a]/20 text-center">
+                  <span className="text-[11px] text-[#fff0c2]/60 block mb-3">
+                    Event Venue: Jyoti Party Plot • Vadodara, Gujarat
+                  </span>
+                  
+                  {/* Additional explicit Close Button at bottom */}
+                  <button
+                    type="button"
+                    onClick={closeModal}
+                    onTouchEnd={closeModal}
+                    className="w-full py-2.5 rounded-xl border border-[#febf4a]/30 bg-[#250417] text-[#febf4a] text-xs font-semibold uppercase tracking-wider hover:bg-[#5f1040] active:scale-98 transition-all cursor-pointer"
+                  >
+                    Close Window
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
 
     </section>
   );
