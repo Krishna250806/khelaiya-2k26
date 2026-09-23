@@ -46,7 +46,7 @@ export default function AboutSection() {
 
               <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 mb-5">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-[#febf4a]/25 via-[#5f1040]/80 to-[#0f4d5b]/80 border border-[#febf4a]/50 p-2 flex-shrink-0 shadow-gold-glow flex items-center justify-center">
-                  <img src="/nuv-assets/asset4_durga.svg" alt="Maa Amba Navratri Deity" className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_2px_8px_rgba(254,191,74,0.5)]" />
+                  <img src="/durgamaa.png" alt="Maa Durga" className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_2px_8px_rgba(254,191,74,0.5)]" />
                 </div>
                 <div>
                   <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-bold text-[#febf4a] block mb-1">

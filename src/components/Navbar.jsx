@@ -48,8 +48,8 @@ export default function Navbar({ onRegisterClick, onReopenDoors }) {
           >
             <div className="relative w-10 h-10 rounded-full border border-[#febf4a]/70 bg-gradient-to-br from-[#5f1040] via-[#2a061b] to-[#0f4d5b] flex items-center justify-center shadow-gold-glow group-hover:scale-105 transition-transform overflow-hidden p-1">
               <img 
-                src="/nuv-assets/asset4_durga.svg" 
-                alt="Maa Ambe" 
+                src="/durgamaa.png" 
+                alt="Maa Durga" 
                 className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_2px_4px_rgba(254,191,74,0.5)]"
               />
             </div>

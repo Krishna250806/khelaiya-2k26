@@ -42,8 +42,8 @@ export default function RegistrationSection({ onRegisterClick }) {
             {/* Top Emblem with Maa Ambe */}
             <div className="w-16 h-16 rounded-full border border-[#febf4a]/70 bg-gradient-to-br from-[#5f1040] via-[#2a061b] to-[#0f4d5b] mx-auto flex items-center justify-center shadow-gold-glow mb-6 overflow-hidden p-2 relative z-10">
               <img 
-                src="/nuv-assets/asset4_durga.svg" 
-                alt="Maa Ambe" 
+                src="/durgamaa.png" 
+                alt="Maa Durga" 
                 className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_2px_6px_rgba(254,191,74,0.6)]" 
               />
             </div>

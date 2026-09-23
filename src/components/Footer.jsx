@@ -32,7 +32,7 @@ export default function Footer({ onRegisterClick }) {
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-11 h-11 rounded-full border border-[#febf4a] bg-gradient-to-br from-[#5f1040] to-[#0f4d5b] flex items-center justify-center shadow-gold-glow overflow-hidden p-1.5">
-                <img src="/nuv-assets/asset4_durga.svg" alt="Maa Ambe" className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_2px_4px_rgba(254,191,74,0.5)]" />
+                <img src="/durgamaa.png" alt="Maa Durga" className="w-full h-full object-contain filter brightness-110 drop-shadow-[0_2px_4px_rgba(254,191,74,0.5)]" />
               </div>
               <span className="text-2xl font-bold tracking-wider text-gradient-gold">
                 <span className="font-nuv font-bold">NUV </span>
