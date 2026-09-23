@@ -53,7 +53,7 @@ export default function RegistrationSection({ onRegisterClick }) {
             </h3>
 
             <p className="text-base sm:text-lg text-[#fff0c2]/90 max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
-              Experience the vibrant rhythms of Navratri with thousands of Garba lovers at Vadodara's most anticipated festive gathering.
+              Join the university community for an evening of traditional Garba, music, and celebration.
             </p>
 
             {/* Event Info Strip */}
