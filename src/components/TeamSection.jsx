@@ -169,9 +169,6 @@ export default function TeamSection() {
                   <h4 className="font-display text-base sm:text-lg font-bold text-white tracking-wide">
                     {teamGroup.teamName}
                   </h4>
-                  <span className="text-[11px] text-[#febf4a]/70 font-mono ml-auto">
-                    {teamGroup.members.length} {teamGroup.members.length === 1 ? 'Head' : 'Heads'}
-                  </span>
                 </div>
 
                 {/* Team Members Flex/Grid with Compact Lower-Sized Cards */}
