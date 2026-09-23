@@ -96,12 +96,12 @@ export const LEADERSHIP_TEAM = {
     {
       name: "Vidhi Shah",
       designation: "Vice-President",
-      image: null, // Tasteful placeholder
+      image: "/profiles/vidhi.jpeg",
     },
   ],
   treasurers: [
     {
-      name: "Ayaan Barodalawala",
+      name: "Ayaan Barodawala",
       designation: "Treasurer",
       image: "/profiles/ayaan.jpeg",
     },
@@ -359,12 +359,12 @@ export const SPONSORS_DATA = {
   otherSponsors: [
     { id: "other-1", name: "Sur Taal Beats", role: "Sound & Light Partner" },
     { id: "other-2", name: "Vadodara Express", role: "Media Partner" },
-    { id: "other-3", name: "Fizz Goli", role: "Refreshment Partner", logo: "/sponsors/fizzgoli.png" },
+    { id: "other-3", name: "Fizz Goli", role: "Beverage Partner", logo: "/sponsors/fizzgoli.png" },
     { id: "other-4", name: "Shree Mandap Creators", role: "Decor & Ambience" },
     { id: "other-5", name: "Chaniya Choli Hub", role: "Fashion & Attire" },
     { id: "other-6", name: "Garuda Security Services", role: "Safety & Security" },
     { id: "other-7", name: "Maharaja Caterers", role: "Food & Hospitality" },
-    { id: "other-8", name: "Vihav", role: "Associate Partner", logo: "/sponsors/vihav.png" },
+    { id: "other-8", name: "Vihav", role: "Sponsor", logo: "/sponsors/vihav.png" },
   ],
 };
 

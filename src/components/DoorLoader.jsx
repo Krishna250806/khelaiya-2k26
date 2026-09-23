@@ -267,20 +267,20 @@ export default function DoorLoader({ onComplete }) {
             </div>
 
             {/* ========================================================= */}
-            {/* CENTER OF RIGHT DOOR: GARBA DANDIYA COUPLE IN CARVED FRAME */}
+            {/* CENTER OF RIGHT DOOR: MAA DURGA IN CARVED FRAME */}
             {/* ========================================================= */}
             <div className="relative z-20 flex items-center justify-center pointer-events-none my-auto py-2 sm:py-4">
               <div className="w-full max-w-[280px] sm:max-w-sm md:max-w-md aspect-[16/11] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#18020e] via-[#2b051b] to-[#12010a] border-2 sm:border-4 border-[#febf4a]/80 shadow-[0_15px_40px_rgba(0,0,0,0.95),inset_0_6px_20px_rgba(0,0,0,0.95),inset_0_-3px_8px_rgba(254,191,74,0.25)] p-2 sm:p-4 flex items-center justify-center relative overflow-hidden backdrop-blur-md">
                 
-                {/* Inlaid Garba Dandiya Artwork */}
-                <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden shadow-inner border border-[#febf4a]/60 bg-[#16020c]">
+                {/* Inlaid Maa Durga Artwork */}
+                <div className="relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden shadow-inner border border-[#febf4a]/60 bg-[#3b2816] flex items-center justify-center">
                   <img
-                    src="/nuv-assets/garba-couple.jpg"
-                    alt="Garba and Dandiya Dancers"
-                    className="w-full h-full object-cover filter brightness-105"
+                    src="/nuv-assets/door-durga.png"
+                    alt="Maa Durga"
+                    className="w-full h-full object-contain filter brightness-105"
                   />
                   {/* Subtle inner warm shadow */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#18020e]/60 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#18020e]/40 via-transparent to-transparent pointer-events-none" />
                 </div>
               </div>
             </div>

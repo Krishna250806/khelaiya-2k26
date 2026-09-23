@@ -113,20 +113,25 @@ export default function SponsorsSection() {
 
     let animationFrameId;
     let lastTime = performance.now();
+    let scrollPos = container.scrollLeft;
 
     const step = (currentTime) => {
-      const delta = (currentTime - lastTime) / 1000;
+      const delta = Math.min((currentTime - lastTime) / 1000, 0.1);
       lastTime = currentTime;
 
       if (isAutoPlay && !isPaused && container) {
-        container.scrollLeft += 40 * delta;
+        // Paced slightly faster than 40 (58 px/sec) and silky smooth subpixel calculation
+        scrollPos += 58 * delta;
 
         const singleSetWidth = container.scrollWidth / 4;
-        if (container.scrollLeft >= singleSetWidth * 3) {
-          container.scrollLeft -= singleSetWidth;
-        } else if (container.scrollLeft <= 40) {
-          container.scrollLeft += singleSetWidth;
+        if (scrollPos >= singleSetWidth * 3) {
+          scrollPos -= singleSetWidth;
+        } else if (scrollPos <= 40) {
+          scrollPos += singleSetWidth;
         }
+        container.scrollLeft = scrollPos;
+      } else if (container) {
+        scrollPos = container.scrollLeft;
       }
 
       animationFrameId = requestAnimationFrame(step);
@@ -252,7 +257,7 @@ export default function SponsorsSection() {
             {/* Scrollable Track */}
             <div
               ref={toranScrollRef}
-              className="flex items-start gap-6 overflow-x-auto no-scrollbar scroll-smooth py-2 px-10 sm:px-16"
+              className="flex items-start gap-6 overflow-x-auto no-scrollbar py-2 px-10 sm:px-16"
               style={{
                 scrollbarWidth: 'none',
                 msOverflowStyle: 'none',
