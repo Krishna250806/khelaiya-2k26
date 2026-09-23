@@ -358,39 +358,24 @@ export const SPONSORS_DATA = {
 
 export const FAQ_ITEMS = [
   {
-    question: "Who can attend NUV खेलैया?",
+    question: "Who is eligible to register for NUV खेलैया?",
     answer:
-      "NUV खेलैया is open to Garba enthusiasts, students, youth, and authorized guests. Valid passes or approved registration confirmation is required for entry.",
+      "Registration is open to all university members, including students across all programs, faculty, alumni, and campus community. A valid university ID will be required for entry.",
   },
   {
-    question: "How do I register for NUV खेलैया?",
+    question: "Where is the event venue located?",
     answer:
-      "Registration passes will be available soon on this official portal. Stay tuned as registration opens shortly.",
+      "The festival will be celebrated at Jyoti Party Plot, conveniently situated near Pandya Bridge in Vadodara, Gujarat.",
   },
   {
-    question: "What should I wear?",
+    question: "Whom can I connect with for general enquiries?",
     answer:
-      "Traditional festive Indian attire is highly encouraged (Chaniya Choli, Kurta, Kediyu, Dhoti) to celebrate the festive spirit and heritage of Navratri.",
+      "For any queries regarding passes, schedules, or event details, feel free to reach out to any member of the Central Committee (CC) Team or the respective committee heads.",
   },
   {
-    question: "Where is the event taking place?",
+    question: "Is traditional festive attire mandatory?",
     answer:
-      "The event takes place at Jyoti Party Plot in Vadodara, Gujarat. Entry gates, parking areas, and timing details will be notified on the portal.",
-  },
-  {
-    question: "Is registration mandatory?",
-    answer:
-      "Yes, registration/entry pass is mandatory for all attendees to ensure smooth entry, security, and comfortable crowd experience.",
-  },
-  {
-    question: "What should I bring?",
-    answer:
-      "Please carry a valid photo ID along with your digital or printed registration confirmation pass. You are also welcome to bring your favorite Dandiya sticks.",
-  },
-  {
-    question: "Who can I contact for queries?",
-    answer:
-      "You can reach out to the organizing committee and team heads through the contact links on this portal.",
+      "Yes, authentic traditional attire (such as Chaniya Choli, Kurta-Pajama, Kedia, or Dhoti) is highly encouraged to celebrate the rich cultural heritage and spirit of Navratri.",
   },
 ];
 

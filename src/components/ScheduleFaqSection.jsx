@@ -76,7 +76,7 @@ export default function ScheduleFaqSection() {
                     Jyoti Party Plot
                   </h4>
                   <p className="text-xs text-[#fff0c2]/70 mt-1">
-                    Vadodara, Gujarat • Entry passes & gate instructions to be announced.
+                    Near Pandya Bridge, Vadodara, Gujarat • Entry passes & gate instructions to be announced.
                   </p>
                 </div>
               </div>
