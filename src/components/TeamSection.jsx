@@ -84,7 +84,7 @@ export default function TeamSection() {
           badge="Organizing Committee"
           title="THE"
           highlight="TEAM"
-          subtitle="Meet the dedicated student leaders orchestrating the cultural celebration of NUV खेलैया."
+          subtitle="Meet the dedicated faculty coordinators and student leaders orchestrating the cultural celebration of NUV खेलैया."
         />
 
         {/* ======================================================= */}
@@ -98,6 +98,22 @@ export default function TeamSection() {
             </h3>
             <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#febf4a]/60" />
           </div>
+
+          {/* Faculty Coordinators */}
+          {LEADERSHIP_TEAM.facultyCoordinators && LEADERSHIP_TEAM.facultyCoordinators.length > 0 && (
+            <div className="mb-14">
+              <div className="text-center mb-6">
+                <span className="inline-block text-xs font-bold uppercase tracking-[0.2em] text-[#febf4a] px-4 py-1.5 rounded-full bg-[#5f1040]/80 border border-[#febf4a]/40 shadow-sm">
+                  Faculty Coordinators
+                </span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                {LEADERSHIP_TEAM.facultyCoordinators.map((member) => (
+                  <MemberCard key={member.name} member={member} highlightBadge="Faculty Coordinator" />
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Presidents */}
           <div className="mb-12">

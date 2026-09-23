@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, PhoneCall, Sparkles, X, Crown, Shield, Music, Radio, Coffee, Gem, Utensils, Tv } from 'lucide-react';
+import { Phone, PhoneCall, Sparkles, X, Crown, Shield, Music, Radio, Coffee, Gem, Utensils, Tv, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import SectionHeading from './common/SectionHeading';
 import FestiveCardBorder from './common/FestiveCardBorder';
 import { SPONSORS_DATA, OUTREACH_CONTACTS } from '../data/festivalData';
@@ -25,6 +25,29 @@ export default function SponsorsSection() {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
   const [submittedInquiry, setSubmittedInquiry] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const toranScrollRef = useRef(null);
+  const manualTimeoutRef = useRef(null);
+
+  const pauseAutoTemporarily = () => {
+    setIsAutoPlay(false);
+    if (manualTimeoutRef.current) clearTimeout(manualTimeoutRef.current);
+    manualTimeoutRef.current = setTimeout(() => {
+      setIsAutoPlay(true);
+    }, 6000);
+  };
+
+  const handlePrevSponsor = () => {
+    if (!toranScrollRef.current) return;
+    pauseAutoTemporarily();
+    toranScrollRef.current.scrollBy({ left: -290, behavior: 'smooth' });
+  };
+
+  const handleNextSponsor = () => {
+    if (!toranScrollRef.current) return;
+    pauseAutoTemporarily();
+    toranScrollRef.current.scrollBy({ left: 290, behavior: 'smooth' });
+  };
 
   // Prevent background scroll on iOS and desktop when modal is active
   useEffect(() => {
@@ -76,8 +99,45 @@ export default function SponsorsSection() {
 
   const titleSponsors = SPONSORS_DATA?.titleSponsors || [];
   const otherSponsors = SPONSORS_DATA?.otherSponsors || [];
-  // Duplicate for seamless 0% -> -50% infinite scroll
-  const marqueeList = [...otherSponsors, ...otherSponsors];
+  // 4 sets for continuous smooth looping and manual navigation in both directions
+  const marqueeList = [...otherSponsors, ...otherSponsors, ...otherSponsors, ...otherSponsors];
+
+  useEffect(() => {
+    const container = toranScrollRef.current;
+    if (!container) return;
+
+    // Start in the second quadrant for immediate bi-directional manual scroll
+    if (container.scrollLeft === 0) {
+      container.scrollLeft = container.scrollWidth / 4;
+    }
+
+    let animationFrameId;
+    let lastTime = performance.now();
+
+    const step = (currentTime) => {
+      const delta = (currentTime - lastTime) / 1000;
+      lastTime = currentTime;
+
+      if (isAutoPlay && !isPaused && container) {
+        container.scrollLeft += 40 * delta;
+
+        const singleSetWidth = container.scrollWidth / 4;
+        if (container.scrollLeft >= singleSetWidth * 3) {
+          container.scrollLeft -= singleSetWidth;
+        } else if (container.scrollLeft <= 40) {
+          container.scrollLeft += singleSetWidth;
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    animationFrameId = requestAnimationFrame(step);
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      if (manualTimeoutRef.current) clearTimeout(manualTimeoutRef.current);
+    };
+  }, [isAutoPlay, isPaused]);
 
   return (
     <section id="sponsors" className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-[#0c2e36] via-[#24061a] to-[#210314]">
@@ -143,7 +203,7 @@ export default function SponsorsSection() {
         </div>
 
         {/* ======================================================= */}
-        {/* 2. TORAN TYPE SPONSOR LIST (Moving Sideways Infinitely)  */}
+        {/* 2. TORAN TYPE SPONSOR LIST (Moving Sideways with Manual Controls) */}
         {/* ======================================================= */}
         <div className="mb-20">
           
@@ -168,14 +228,34 @@ export default function SponsorsSection() {
             </div>
 
             {/* Left & Right Gradient Shadows for Seamless Fade In/Out */}
-            <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#0c2e36] via-[#0c2e36]/80 to-transparent z-20 pointer-events-none" />
-            <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#210314] via-[#210314]/80 to-transparent z-20 pointer-events-none" />
+            <div className="absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#0c2e36] via-[#0c2e36]/80 to-transparent z-20 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#210314] via-[#210314]/80 to-transparent z-20 pointer-events-none" />
 
-            {/* Moving Marquee Track */}
+            {/* Floating Manual Navigation Arrows (Left & Right) */}
+            <button
+              type="button"
+              onClick={handlePrevSponsor}
+              aria-label="Previous Sponsor"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#3a0826]/90 border border-[#febf4a]/60 text-[#febf4a] flex items-center justify-center hover:bg-[#5f1040] hover:scale-110 active:scale-95 shadow-gold-glow backdrop-blur-md transition-all duration-200 cursor-pointer"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+            <button
+              type="button"
+              onClick={handleNextSponsor}
+              aria-label="Next Sponsor"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#3a0826]/90 border border-[#febf4a]/60 text-[#febf4a] flex items-center justify-center hover:bg-[#5f1040] hover:scale-110 active:scale-95 shadow-gold-glow backdrop-blur-md transition-all duration-200 cursor-pointer"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+
+            {/* Scrollable Track */}
             <div
-              className="flex items-start gap-6 w-max animate-marquee"
+              ref={toranScrollRef}
+              className="flex items-start gap-6 overflow-x-auto no-scrollbar scroll-smooth py-2 px-10 sm:px-16"
               style={{
-                animationPlayState: isPaused ? 'paused' : 'running',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
               }}
             >
               {marqueeList.map((sponsor, index) => {
@@ -183,7 +263,7 @@ export default function SponsorsSection() {
                 return (
                   <div
                     key={`${sponsor.id}-${index}`}
-                    className="relative flex flex-col items-center cursor-pointer transition-transform duration-300 hover:-translate-y-2"
+                    className="relative flex flex-col items-center flex-shrink-0 cursor-pointer transition-transform duration-300 hover:-translate-y-2"
                   >
                     {/* Hanging String & Toran Brass Bell/Bead */}
                     <div className="flex flex-col items-center mb-1">
@@ -198,18 +278,28 @@ export default function SponsorsSection() {
                         {/* Toran Top Arch Accent */}
                         <div className="w-12 h-1 bg-gradient-to-r from-transparent via-[#febf4a] to-transparent rounded-full mb-3" />
 
-                        {/* Partner Category Icon */}
-                        <div className="w-11 h-11 rounded-full bg-[#febf4a]/15 border border-[#febf4a]/50 text-[#febf4a] flex items-center justify-center mb-3 shadow-inner">
-                          <IconComponent className="w-5 h-5 text-[#febf4a]" />
+                        {/* Partner Category Icon or Brand Logo (Increased Size) */}
+                        <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-2xl border-2 border-[#febf4a]/60 flex items-center justify-center mb-3 shadow-md overflow-hidden transition-transform duration-300 group-hover:scale-105 ${
+                          sponsor.logo ? 'bg-white p-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.35)]' : 'bg-gradient-to-br from-[#febf4a]/20 to-[#5f1040]/30 text-[#febf4a]'
+                        }`}>
+                          {sponsor.logo ? (
+                            <img
+                              src={sponsor.logo}
+                              alt={sponsor.name}
+                              className="w-full h-full object-contain filter"
+                            />
+                          ) : (
+                            <IconComponent className="w-9 h-9 sm:w-10 sm:h-10 text-[#febf4a]" />
+                          )}
                         </div>
 
-                        {/* Partner Name */}
-                        <h5 className="font-display text-lg sm:text-xl font-bold text-white mb-1 tracking-wide group-hover:text-[#febf4a]">
+                        {/* Partner Name (Reduced Font Size a Little Bit) */}
+                        <h5 className="font-display text-sm sm:text-base font-bold text-white mb-1 tracking-wide group-hover:text-[#febf4a] text-center line-clamp-1">
                           {sponsor.name}
                         </h5>
 
                         {/* Partner Role / Badge */}
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-[#febf4a]/90 px-3 py-0.5 rounded-full bg-[#5f1040]/70 border border-[#febf4a]/30 mt-1">
+                        <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-[#febf4a]/90 px-3 py-0.5 rounded-full bg-[#5f1040]/70 border border-[#febf4a]/30 mt-0.5">
                           {sponsor.role}
                         </span>
 
@@ -226,8 +316,47 @@ export default function SponsorsSection() {
               })}
             </div>
 
-            <p className="text-center text-[11px] text-[#fff0c2]/50 italic mt-4">
-              ✦ Hover to pause toran scroll • Click to inquire ✦
+            {/* Manual Navigation Controls & Interactive Helper */}
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6">
+              <button
+                type="button"
+                onClick={handlePrevSponsor}
+                className="px-3.5 py-1.5 rounded-full bg-[#3a0826]/80 border border-[#febf4a]/40 text-[#febf4a] text-xs font-semibold hover:bg-[#5f1040] hover:border-[#febf4a] hover:shadow-gold-glow flex items-center gap-1.5 transition-all cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>Prev</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsAutoPlay((prev) => !prev)}
+                className="px-3.5 py-1.5 rounded-full bg-[#3a0826]/80 border border-[#febf4a]/40 text-[#febf4a] text-xs font-semibold hover:bg-[#5f1040] hover:border-[#febf4a] hover:shadow-gold-glow flex items-center gap-1.5 transition-all cursor-pointer"
+              >
+                {isAutoPlay ? (
+                  <>
+                    <Pause className="w-3.5 h-3.5 text-[#febf4a]" />
+                    <span>Auto-Scroll: ON</span>
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3.5 h-3.5 text-[#febf4a]" />
+                    <span>Auto-Scroll: PAUSED</span>
+                  </>
+                )}
+              </button>
+
+              <button
+                type="button"
+                onClick={handleNextSponsor}
+                className="px-3.5 py-1.5 rounded-full bg-[#3a0826]/80 border border-[#febf4a]/40 text-[#febf4a] text-xs font-semibold hover:bg-[#5f1040] hover:border-[#febf4a] hover:shadow-gold-glow flex items-center gap-1.5 transition-all cursor-pointer"
+              >
+                <span>Next</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            <p className="text-center text-[11px] text-[#fff0c2]/50 italic mt-3">
+              ✦ Use arrows or drag to navigate • Hover to pause ✦
             </p>
           </div>
         </div>

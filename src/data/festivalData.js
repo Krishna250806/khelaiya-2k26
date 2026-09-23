@@ -63,6 +63,18 @@ export const HIGHLIGHTS_DATA = [
 ];
 
 export const LEADERSHIP_TEAM = {
+  facultyCoordinators: [
+    {
+      name: "Dr. Parth Pandya",
+      designation: "Faculty Coordinator",
+      image: "/profiles/parth.jpg",
+    },
+    {
+      name: "Dr. Jigar Shah",
+      designation: "Faculty Coordinator",
+      image: "/profiles/jigar.jpg",
+    },
+  ],
   presidents: [
     {
       name: "Jatin Asnani",
@@ -347,12 +359,12 @@ export const SPONSORS_DATA = {
   otherSponsors: [
     { id: "other-1", name: "Sur Taal Beats", role: "Sound & Light Partner" },
     { id: "other-2", name: "Vadodara Express", role: "Media Partner" },
-    { id: "other-3", name: "Amrut Beverage Co.", role: "Refreshment Partner" },
+    { id: "other-3", name: "Fizz Goli", role: "Refreshment Partner", logo: "/sponsors/fizzgoli.png" },
     { id: "other-4", name: "Shree Mandap Creators", role: "Decor & Ambience" },
     { id: "other-5", name: "Chaniya Choli Hub", role: "Fashion & Attire" },
     { id: "other-6", name: "Garuda Security Services", role: "Safety & Security" },
     { id: "other-7", name: "Maharaja Caterers", role: "Food & Hospitality" },
-    { id: "other-8", name: "Vadodara Live Digital", role: "Digital Partner" },
+    { id: "other-8", name: "Vihav", role: "Associate Partner", logo: "/sponsors/vihav.png" },
   ],
 };
 
