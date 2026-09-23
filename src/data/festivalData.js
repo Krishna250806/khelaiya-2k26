@@ -370,12 +370,12 @@ export const FAQ_ITEMS = [
   {
     question: "Whom can I connect with for general enquiries?",
     answer:
-      "For any queries regarding passes, schedules, or event details, feel free to reach out to any member of the Central Committee (CC) Team or the respective committee heads.",
+      "For any queries regarding passes, schedules, or event details, feel free to reach out to any member of the Cultural Committee (CC) Team or the respective committee heads.",
   },
   {
-    question: "Is traditional festive attire mandatory?",
+    question: "What documents or items must I carry for entry?",
     answer:
-      "Yes, authentic traditional attire (such as Chaniya Choli, Kurta-Pajama, Kedia, or Dhoti) is highly encouraged to celebrate the rich cultural heritage and spirit of Navratri.",
+      "Please carry your valid university ID card along with your digital or printed registration pass for verification at the entrance. Attendees are also welcome to bring their own pair of Dandiya sticks.",
   },
 ];
 
