@@ -372,10 +372,4 @@ export const FAQ_ITEMS = [
     answer:
       "For any queries regarding passes, schedules, or event details, feel free to reach out to any member of the Cultural Committee (CC) Team or the respective committee heads.",
   },
-  {
-    question: "What documents or items must I carry for entry?",
-    answer:
-      "Please carry your valid university ID card along with your digital or printed registration pass for verification at the entrance. Attendees are also welcome to bring their own pair of Dandiya sticks.",
-  },
 ];
-
