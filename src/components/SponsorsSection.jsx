@@ -11,6 +11,7 @@ import { DiyaIcon } from './common/MandalaDecorations';
 const ICON_MAP = {
   "title-1": Crown,
   "title-2": Sparkles,
+  "bev-1": Coffee,
   "other-1": Music,
   "other-2": Radio,
   "other-3": Coffee,
@@ -98,6 +99,7 @@ export default function SponsorsSection() {
   };
 
   const titleSponsors = SPONSORS_DATA?.titleSponsors || [];
+  const beveragePartners = SPONSORS_DATA?.beveragePartners || [];
   const otherSponsors = SPONSORS_DATA?.otherSponsors || [];
   // 4 sets for continuous smooth looping and manual navigation in both directions
   const marqueeList = [...otherSponsors, ...otherSponsors, ...otherSponsors, ...otherSponsors];
@@ -161,54 +163,113 @@ export default function SponsorsSection() {
         />
 
         {/* ======================================================= */}
-        {/* 1. TITLE SPONSORS (2 Featured Cards)                    */}
+        {/* 1. TITLE SPONSOR(S)                                     */}
         {/* ======================================================= */}
-        <div className="mb-20">
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#febf4a]/60" />
-            <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-[#febf4a] flex items-center gap-2">
-              <Crown className="w-4 h-4 text-[#febf4a]" />
-              <span>TITLE SPONSORS</span>
-            </span>
-            <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#febf4a]/60" />
-          </div>
+        {titleSponsors.length > 0 && (
+          <div className="mb-20">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#febf4a]/60" />
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-[#febf4a] flex items-center gap-2">
+                <Crown className="w-4 h-4 text-[#febf4a]" />
+                <span>{titleSponsors.length > 1 ? 'TITLE SPONSORS' : 'TITLE SPONSOR'}</span>
+              </span>
+              <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#febf4a]/60" />
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            {titleSponsors.map((sponsor, idx) => (
-              <motion.div
-                key={sponsor.id}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.15 }}
-                whileHover={{ y: -6 }}
-                className="group relative rounded-3xl p-[1.5px] bg-gradient-to-br from-[#febf4a] via-[#ffd982]/60 to-[#5f1040] shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300"
-              >
-                <div className="h-full rounded-[22px] bg-gradient-to-br from-[#330520] via-[#24061a] to-[#0a232b] p-6 sm:p-8 flex items-center justify-center relative overflow-hidden">
-                  
-                  {/* Ornate Corner Accents */}
-                  <div className="absolute top-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
-                  <div className="absolute top-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
-                  <div className="absolute bottom-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
-                  <div className="absolute bottom-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
+            <div className={`grid gap-8 mx-auto ${
+              titleSponsors.length === 1 
+                ? 'max-w-md grid-cols-1' 
+                : 'max-w-3xl grid-cols-1 md:grid-cols-2'
+            }`}>
+              {titleSponsors.map((sponsor, idx) => (
+                <motion.div
+                  key={sponsor.id}
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.15 }}
+                  whileHover={{ y: -6 }}
+                  className="group relative rounded-3xl p-[1.5px] bg-gradient-to-br from-[#febf4a] via-[#ffd982]/60 to-[#5f1040] shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300"
+                >
+                  <div className="h-full rounded-[22px] bg-gradient-to-br from-[#330520] via-[#24061a] to-[#0a232b] p-6 sm:p-8 flex items-center justify-center relative overflow-hidden">
+                    
+                    {/* Ornate Corner Accents */}
+                    <div className="absolute top-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
+                    <div className="absolute top-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
+                    <div className="absolute bottom-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
+                    <div className="absolute bottom-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
 
-                  {/* Brand Logo Only (No text inside card) */}
-                  <div className="w-full max-w-[240px] sm:max-w-[260px] aspect-square rounded-2xl bg-white p-4 sm:p-6 flex items-center justify-center shadow-lg border border-[#febf4a]/50 group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
-                    <img
-                      src={sponsor.logo}
-                      alt={sponsor.name || "Sponsor"}
-                      className="max-h-full max-w-full object-contain"
-                    />
+                    {/* Brand Logo Only (No text inside card) */}
+                    <div className="w-full max-w-[240px] sm:max-w-[260px] aspect-square rounded-2xl bg-white p-4 sm:p-6 flex items-center justify-center shadow-lg border border-[#febf4a]/50 group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
+                      <img
+                        src={sponsor.logo}
+                        alt={sponsor.name || "Title Sponsor"}
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
+
                   </div>
-
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* ======================================================= */}
-        {/* 2. TORAN TYPE SPONSOR LIST (Moving Sideways with Manual Controls) */}
+        {/* 2. OFFICIAL BEVERAGE PARTNER (Dedicated Section)         */}
+        {/* ======================================================= */}
+        {beveragePartners.length > 0 && (
+          <div className="mb-20">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-r from-transparent to-[#febf4a]/60" />
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.3em] text-[#febf4a] flex items-center gap-2">
+                <Coffee className="w-4 h-4 text-[#febf4a]" />
+                <span>OFFICIAL BEVERAGE PARTNER</span>
+              </span>
+              <div className="h-[1px] w-12 sm:w-20 bg-gradient-to-l from-transparent to-[#febf4a]/60" />
+            </div>
+
+            <div className={`grid gap-8 mx-auto ${
+              beveragePartners.length === 1 
+                ? 'max-w-md grid-cols-1' 
+                : 'max-w-3xl grid-cols-1 md:grid-cols-2'
+            }`}>
+              {beveragePartners.map((sponsor, idx) => (
+                <motion.div
+                  key={sponsor.id}
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.15 }}
+                  whileHover={{ y: -6 }}
+                  className="group relative rounded-3xl p-[1.5px] bg-gradient-to-br from-[#febf4a] via-[#ffd982]/60 to-[#5f1040] shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300"
+                >
+                  <div className="h-full rounded-[22px] bg-gradient-to-br from-[#330520] via-[#24061a] to-[#0a232b] p-6 sm:p-8 flex items-center justify-center relative overflow-hidden">
+                    
+                    {/* Ornate Corner Accents */}
+                    <div className="absolute top-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
+                    <div className="absolute top-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
+                    <div className="absolute bottom-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
+                    <div className="absolute bottom-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
+
+                    {/* Brand Logo Only (No text inside card) */}
+                    <div className="w-full max-w-[240px] sm:max-w-[260px] aspect-square rounded-2xl bg-white p-4 sm:p-6 flex items-center justify-center shadow-lg border border-[#febf4a]/50 group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
+                      <img
+                        src={sponsor.logo}
+                        alt={sponsor.name || "Beverage Partner"}
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
+
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ======================================================= */}
+        {/* 3. TORAN TYPE SPONSOR LIST (Moving Sideways with Manual Controls) */}
         {/* ======================================================= */}
         <div className="mb-20">
           

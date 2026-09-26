@@ -347,11 +347,14 @@ export const SPONSORS_DATA = {
       description: "Official Presenting Partner for NUV खेलैया 2026",
       tagline: "Presented By",
     },
+  ],
+  beveragePartners: [
     {
-      id: "title-2",
+      id: "bev-1",
       name: "Fizz Goli",
       logo: "/sponsors/fizzgoli.png",
-      tier: "Beverage Partner",
+      tier: "Official Beverage Partner",
+      role: "Beverage Partner",
       description: "Official Beverage Partner for NUV खेलैया 2026",
       tagline: "Beverage Partner",
     },
