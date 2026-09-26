@@ -196,7 +196,7 @@ export default function SponsorsSection() {
                   <div className="w-full max-w-[240px] sm:max-w-[260px] aspect-square rounded-2xl bg-white p-4 sm:p-6 flex items-center justify-center shadow-lg border border-[#febf4a]/50 group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
                     <img
                       src={sponsor.logo}
-                      alt="Title Sponsor"
+                      alt={sponsor.name || "Sponsor"}
                       className="max-h-full max-w-full object-contain"
                     />
                   </div>
