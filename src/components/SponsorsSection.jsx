@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, PhoneCall, Sparkles, X, Crown, Shield, Music, Radio, Coffee, Gem, Utensils, Tv, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
+import { Phone, PhoneCall, Sparkles, X, Crown, Shield, Coffee, Gem, Utensils, ChevronLeft, ChevronRight } from 'lucide-react';
 import SectionHeading from './common/SectionHeading';
 import FestiveCardBorder from './common/FestiveCardBorder';
 import { SPONSORS_DATA, OUTREACH_CONTACTS } from '../data/festivalData';
@@ -10,21 +10,17 @@ import { DiyaIcon } from './common/MandalaDecorations';
 // Map sponsor icon types
 const ICON_MAP = {
   "title-1": Crown,
-  "title-2": Sparkles,
   "bev-1": Coffee,
-  "other-1": Music,
-  "other-2": Radio,
-  "other-3": Coffee,
-  "other-4": Sparkles,
-  "other-5": Gem,
-  "other-6": Shield,
-  "other-7": Utensils,
-  "other-8": Tv,
+  "other-vihav": Shield,
+  "other-vstrn": Sparkles,
+  "other-rd-infusion": Utensils,
+  "other-amul-organic": Gem,
+  "other-black-bunny": Sparkles,
+  "other-darfin": Shield,
 };
 
 export default function SponsorsSection() {
   const [inquiryModalOpen, setInquiryModalOpen] = useState(false);
-  const [submittedInquiry, setSubmittedInquiry] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const toranScrollRef = useRef(null);
@@ -41,13 +37,13 @@ export default function SponsorsSection() {
   const handlePrevSponsor = () => {
     if (!toranScrollRef.current) return;
     pauseAutoTemporarily();
-    toranScrollRef.current.scrollBy({ left: -290, behavior: 'smooth' });
+    toranScrollRef.current.scrollBy({ left: -320, behavior: 'smooth' });
   };
 
   const handleNextSponsor = () => {
     if (!toranScrollRef.current) return;
     pauseAutoTemporarily();
-    toranScrollRef.current.scrollBy({ left: 290, behavior: 'smooth' });
+    toranScrollRef.current.scrollBy({ left: 320, behavior: 'smooth' });
   };
 
   // Prevent background scroll on iOS and desktop when modal is active
@@ -89,14 +85,6 @@ export default function SponsorsSection() {
     setInquiryModalOpen(false);
   };
 
-  const handleInquirySubmit = (e) => {
-    e.preventDefault();
-    setSubmittedInquiry(true);
-    setTimeout(() => {
-      setSubmittedInquiry(false);
-      setInquiryModalOpen(false);
-    }, 2200);
-  };
 
   const titleSponsors = SPONSORS_DATA?.titleSponsors || [];
   const beveragePartners = SPONSORS_DATA?.beveragePartners || [];
@@ -121,7 +109,7 @@ export default function SponsorsSection() {
       const delta = Math.min((currentTime - lastTime) / 1000, 0.1);
       lastTime = currentTime;
 
-      if (isAutoPlay && !isPaused && container) {
+      if (isAutoPlay && !isPaused && !inquiryModalOpen && container) {
         // Paced slightly faster than 40 (58 px/sec) and silky smooth subpixel calculation
         scrollPos += 58 * delta;
 
@@ -144,7 +132,7 @@ export default function SponsorsSection() {
       cancelAnimationFrame(animationFrameId);
       if (manualTimeoutRef.current) clearTimeout(manualTimeoutRef.current);
     };
-  }, [isAutoPlay, isPaused]);
+  }, [isAutoPlay, isPaused, inquiryModalOpen]);
 
   return (
     <section id="sponsors" className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-[#0c2e36] via-[#24061a] to-[#210314]">
@@ -200,11 +188,11 @@ export default function SponsorsSection() {
                     <div className="absolute bottom-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
 
                     {/* Brand Logo Only (No text inside card) */}
-                    <div className="w-full max-w-[240px] sm:max-w-[260px] aspect-square rounded-2xl bg-white p-4 sm:p-6 flex items-center justify-center shadow-lg border border-[#febf4a]/50 group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
+                    <div className="w-full max-w-[320px] sm:max-w-[380px] h-48 sm:h-56 rounded-2xl bg-white p-3 sm:p-5 flex items-center justify-center shadow-xl border-2 border-[#febf4a] group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
                       <img
                         src={sponsor.logo}
                         alt={sponsor.name || "Title Sponsor"}
-                        className="max-h-full max-w-full object-contain"
+                        className="w-full h-full object-contain"
                       />
                     </div>
 
@@ -253,11 +241,11 @@ export default function SponsorsSection() {
                     <div className="absolute bottom-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
 
                     {/* Brand Logo Only (No text inside card) */}
-                    <div className="w-full max-w-[240px] sm:max-w-[260px] aspect-square rounded-2xl bg-white p-4 sm:p-6 flex items-center justify-center shadow-lg border border-[#febf4a]/50 group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
+                    <div className="w-full max-w-[320px] sm:max-w-[380px] h-48 sm:h-56 rounded-2xl bg-white p-3 sm:p-5 flex items-center justify-center shadow-xl border-2 border-[#febf4a] group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
                       <img
                         src={sponsor.logo}
                         alt={sponsor.name || "Beverage Partner"}
-                        className="max-h-full max-w-full object-contain"
+                        className="w-full h-full object-contain"
                       />
                     </div>
 
@@ -338,24 +326,28 @@ export default function SponsorsSection() {
                     </div>
 
                     {/* Toran Leaf / Pennant Card */}
-                    <div className="w-64 sm:w-72 rounded-2xl p-[1px] bg-gradient-to-b from-[#febf4a]/60 via-[#5f1040]/50 to-[#0f4d5b]/40 hover:from-[#febf4a] hover:to-[#ffd982] hover:shadow-gold-glow transition-all duration-300">
+                    <div className="w-72 sm:w-80 rounded-2xl p-[1px] bg-gradient-to-b from-[#febf4a]/60 via-[#5f1040]/50 to-[#0f4d5b]/40 hover:from-[#febf4a] hover:to-[#ffd982] hover:shadow-gold-glow transition-all duration-300">
                       <div className="rounded-[15px] bg-gradient-to-b from-[#3a0826] via-[#250417] to-[#0a232b] p-5 text-center relative overflow-hidden flex flex-col items-center">
                         
                         {/* Toran Top Arch Accent */}
                         <div className="w-12 h-1 bg-gradient-to-r from-transparent via-[#febf4a] to-transparent rounded-full mb-3" />
 
-                        {/* Partner Category Icon or Brand Logo (Increased Size) */}
-                        <div className={`w-20 h-20 sm:w-24 sm:h-24 rounded-2xl border-2 border-[#febf4a]/60 flex items-center justify-center mb-3 shadow-md overflow-hidden transition-transform duration-300 group-hover:scale-105 ${
-                          sponsor.logo ? 'bg-white p-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.35)]' : 'bg-gradient-to-br from-[#febf4a]/20 to-[#5f1040]/30 text-[#febf4a]'
+                        {/* Partner Category Icon or Brand Logo (Increased Size & Dark Theme Support) */}
+                        <div className={`w-full max-w-[240px] sm:max-w-[260px] h-28 sm:h-32 rounded-2xl border-2 flex items-center justify-center mb-3 shadow-md overflow-hidden transition-transform duration-300 group-hover:scale-105 ${
+                          sponsor.darkBg || sponsor.id === 'other-black-bunny'
+                            ? 'bg-gradient-to-br from-[#1b0415] via-[#10020d] to-[#060005] border-[#febf4a] p-3 shadow-[0_4px_20px_rgba(254,191,74,0.3)]'
+                            : sponsor.logo
+                            ? 'bg-white border-[#febf4a]/70 p-2.5 sm:p-3 shadow-[0_4px_16px_rgba(0,0,0,0.35)]'
+                            : 'bg-gradient-to-br from-[#febf4a]/20 to-[#5f1040]/30 border-[#febf4a]/60 text-[#febf4a]'
                         }`}>
                           {sponsor.logo ? (
                             <img
                               src={sponsor.logo}
                               alt={sponsor.name}
-                              className="w-full h-full object-contain filter"
+                              className="max-h-full max-w-full object-contain filter"
                             />
                           ) : (
-                            <IconComponent className="w-9 h-9 sm:w-10 sm:h-10 text-[#febf4a]" />
+                            <IconComponent className="w-10 h-10 sm:w-12 sm:h-12 text-[#febf4a]" />
                           )}
                         </div>
 
@@ -382,48 +374,7 @@ export default function SponsorsSection() {
               })}
             </div>
 
-            {/* Manual Navigation Controls & Interactive Helper */}
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6">
-              <button
-                type="button"
-                onClick={handlePrevSponsor}
-                className="px-3.5 py-1.5 rounded-full bg-[#3a0826]/80 border border-[#febf4a]/40 text-[#febf4a] text-xs font-semibold hover:bg-[#5f1040] hover:border-[#febf4a] hover:shadow-gold-glow flex items-center gap-1.5 transition-all cursor-pointer"
-              >
-                <ChevronLeft className="w-4 h-4" />
-                <span>Prev</span>
-              </button>
 
-              <button
-                type="button"
-                onClick={() => setIsAutoPlay((prev) => !prev)}
-                className="px-3.5 py-1.5 rounded-full bg-[#3a0826]/80 border border-[#febf4a]/40 text-[#febf4a] text-xs font-semibold hover:bg-[#5f1040] hover:border-[#febf4a] hover:shadow-gold-glow flex items-center gap-1.5 transition-all cursor-pointer"
-              >
-                {isAutoPlay ? (
-                  <>
-                    <Pause className="w-3.5 h-3.5 text-[#febf4a]" />
-                    <span>Auto-Scroll: ON</span>
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-3.5 h-3.5 text-[#febf4a]" />
-                    <span>Auto-Scroll: PAUSED</span>
-                  </>
-                )}
-              </button>
-
-              <button
-                type="button"
-                onClick={handleNextSponsor}
-                className="px-3.5 py-1.5 rounded-full bg-[#3a0826]/80 border border-[#febf4a]/40 text-[#febf4a] text-xs font-semibold hover:bg-[#5f1040] hover:border-[#febf4a] hover:shadow-gold-glow flex items-center gap-1.5 transition-all cursor-pointer"
-              >
-                <span>Next</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            <p className="text-center text-[11px] text-[#fff0c2]/50 italic mt-3">
-              ✦ Use arrows or drag to navigate • Hover to pause ✦
-            </p>
           </div>
         </div>
 
@@ -447,8 +398,13 @@ export default function SponsorsSection() {
       {typeof document !== 'undefined' && createPortal(
         <AnimatePresence>
           {inquiryModalOpen && (
-            <div 
-              className="fixed inset-0 z-[9999] overflow-y-auto flex items-center justify-center p-4 backdrop-blur-md bg-black/85"
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15, ease: "linear" }}
+              style={{ willChange: 'opacity' }}
+              className="fixed inset-0 z-[9999] overflow-y-auto flex items-center justify-center p-4 bg-black/85 md:backdrop-blur-sm transform-gpu"
               onClick={closeModal}
               onTouchEnd={(e) => {
                 if (e.target === e.currentTarget) {
@@ -457,12 +413,13 @@ export default function SponsorsSection() {
               }}
             >
               <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                transition={{ duration: 0.2 }}
+                initial={{ opacity: 0, y: 14, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                style={{ willChange: 'transform, opacity' }}
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-md bg-gradient-to-b from-[#2a061b] via-[#3a0826] to-[#0f4d5b] border-2 border-[#febf4a]/60 rounded-3xl p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.95)]"
+                className="relative w-full max-w-md bg-gradient-to-b from-[#2a061b] via-[#3a0826] to-[#0f4d5b] border border-[#febf4a]/60 rounded-3xl p-5 sm:p-7 shadow-2xl transform-gpu"
               >
                 {/* Large iOS-friendly close button with high touch target */}
                 <button
@@ -499,6 +456,8 @@ export default function SponsorsSection() {
                           <img 
                             src={head.image} 
                             alt={head.name} 
+                            loading="eager"
+                            decoding="async"
                             className="w-12 h-12 rounded-full object-cover border border-[#febf4a]/50 flex-shrink-0"
                           />
                           <div className="min-w-0">
@@ -553,7 +512,7 @@ export default function SponsorsSection() {
                   </button>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
           )}
         </AnimatePresence>,
         document.body

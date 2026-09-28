@@ -44,8 +44,9 @@ export default function RegisterCtaSection({ onRegisterClick }) {
             {/* Primary Action Button */}
             <div className="flex justify-center">
               <motion.a
-                href="#registration"
-                onClick={onRegisterClick}
+                href={FESTIVAL_INFO.registrationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.96 }}
                 className="relative group px-10 py-5 rounded-full bg-gradient-to-r from-[#febf4a] via-[#ffd982] to-[#febf4a] text-[#3a0826] font-display font-bold text-base sm:text-lg tracking-wider uppercase shadow-gold-glow-lg transition-all cursor-pointer overflow-hidden flex items-center justify-center gap-3"

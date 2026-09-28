@@ -8,7 +8,7 @@ export const FESTIVAL_INFO = {
   venue: "Jyoti Party Plot",
   city: "Vadodara, Gujarat",
   address: "Jyoti Party Plot, Vadodara, Gujarat",
-  registrationUrl: "#registration",
+  registrationUrl: "https://nuv.ac.in/nuvkhelaiya/",
 };
 
 export const HIGHLIGHTS_DATA = [
@@ -360,13 +360,43 @@ export const SPONSORS_DATA = {
     },
   ],
   otherSponsors: [
-    { id: "other-1", name: "Sur Taal Beats", role: "Sound & Light Partner" },
-    { id: "other-2", name: "Vadodara Express", role: "Media Partner" },
-    { id: "other-4", name: "Shree Mandap Creators", role: "Decor & Ambience" },
-    { id: "other-5", name: "Chaniya Choli Hub", role: "Fashion & Attire" },
-    { id: "other-6", name: "Garuda Security Services", role: "Safety & Security" },
-    { id: "other-7", name: "Maharaja Caterers", role: "Food & Hospitality" },
-    { id: "other-8", name: "Vihav", role: "Sponsor", logo: "/sponsors/vihav.png" },
+    {
+      id: "other-vihav",
+      name: "Vihav",
+      role: "Sponsor",
+      logo: "/sponsors/vihav.png",
+    },
+    {
+      id: "other-vstrn",
+      name: "vstrn",
+      role: "Gala Partner",
+      logo: "/sponsors/vstrn.png",
+    },
+    {
+      id: "other-rd-infusion",
+      name: "RD infusion",
+      role: "Food Partner",
+      logo: "/sponsors/rd-infusion.png",
+    },
+    {
+      id: "other-amul-organic",
+      name: "Amul Organic",
+      role: "Gifting Partner",
+      logo: "/sponsors/amul.png",
+    },
+    {
+      id: "other-black-bunny",
+      name: "Black Bunny",
+      role: "Gifting Partner",
+      logo: "/sponsors/black-bunny.png",
+      darkBg: true,
+    },
+    {
+      id: "other-darfin",
+      name: "Darfin - Daruwala Finsure",
+      role: "Sponsor",
+      logo: "/sponsors/Darfin.jpeg",
+    },
   ],
 };
 

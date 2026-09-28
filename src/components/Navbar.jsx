@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, DoorOpen } from 'lucide-react';
 import { MandalaPattern } from './common/MandalaDecorations';
+import { FESTIVAL_INFO } from '../data/festivalData';
 
 export default function Navbar({ onRegisterClick, onReopenDoors }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -94,8 +95,9 @@ export default function Navbar({ onRegisterClick, onReopenDoors }) {
 
             {/* Primary Register CTA */}
             <a
-              href="#registration"
-              onClick={onRegisterClick}
+              href={FESTIVAL_INFO.registrationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="relative inline-flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-[#febf4a] via-[#ffd982] to-[#febf4a] text-[#3a0826] font-bold text-xs uppercase tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg transition-all focus:outline-none"
             >
               <span>REGISTER</span>
@@ -106,8 +108,9 @@ export default function Navbar({ onRegisterClick, onReopenDoors }) {
           {/* Mobile Menu Button */}
           <div className="flex md:hidden items-center gap-2">
             <a
-              href="#registration"
-              onClick={onRegisterClick}
+              href={FESTIVAL_INFO.registrationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#febf4a] text-[#3a0826] font-bold text-xs uppercase tracking-wider shadow-gold-glow"
             >
               <span>REGISTER</span>
@@ -150,11 +153,10 @@ export default function Navbar({ onRegisterClick, onReopenDoors }) {
               
               <div className="pt-4 mt-2 border-t border-[#febf4a]/20 flex flex-col gap-3">
                 <a
-                  href="#registration"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    if (onRegisterClick) onRegisterClick();
-                  }}
+                  href={FESTIVAL_INFO.registrationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="w-full py-3 rounded-full bg-gradient-to-r from-[#febf4a] via-[#ffd982] to-[#febf4a] text-[#3a0826] font-bold text-center tracking-wider uppercase text-sm shadow-gold-glow flex items-center justify-center gap-2"
                 >
                   <span>REGISTER NOW</span>

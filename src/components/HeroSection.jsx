@@ -142,8 +142,9 @@ export default function HeroSection({ onRegisterClick }) {
         >
           {/* Primary CTA */}
           <a
-            href="#registration"
-            onClick={onRegisterClick}
+            href={FESTIVAL_INFO.registrationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-[#febf4a] via-[#ffd982] to-[#febf4a] text-[#3a0826] font-bold text-sm sm:text-base tracking-wider uppercase shadow-gold-glow hover:shadow-gold-glow-lg transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />

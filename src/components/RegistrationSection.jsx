@@ -1,53 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Sparkles, Bell, Calendar, MapPin, X, CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Calendar, MapPin, Sparkles } from 'lucide-react';
 import SectionHeading from './common/SectionHeading';
 import FestiveCardBorder from './common/FestiveCardBorder';
 import { FESTIVAL_INFO } from '../data/festivalData';
-import { DiyaIcon, MandalaPattern } from './common/MandalaDecorations';
+import { MandalaPattern } from './common/MandalaDecorations';
 
-export default function RegistrationSection({ onRegisterClick }) {
-  const [alertModalOpen, setAlertModalOpen] = useState(false);
-
-  // Prevent background scroll on iOS and desktop when modal is active
-  useEffect(() => {
-    if (alertModalOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [alertModalOpen]);
-
-  // Handle ESC key to close modal
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setAlertModalOpen(false);
-      }
-    };
-    if (alertModalOpen) {
-      window.addEventListener('keydown', handleKeyDown);
-    }
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [alertModalOpen]);
-
-  const closeAlertModal = (e) => {
-    if (e) {
-      if (typeof e.preventDefault === 'function') e.preventDefault();
-      if (typeof e.stopPropagation === 'function') e.stopPropagation();
-    }
-    setAlertModalOpen(false);
-  };
-
-  const handleRegisterTrigger = (e) => {
-    e.preventDefault();
-    setAlertModalOpen(true);
-  };
-
+export default function RegistrationSection() {
   return (
     <section id="registration" className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-[#210314] via-[#2f071e] to-[#0e2c34]">
       
@@ -104,97 +62,28 @@ export default function RegistrationSection({ onRegisterClick }) {
 
             {/* Action Buttons */}
             <div className="flex items-center justify-center">
-              {/* Primary Registration Button */}
-              <button
-                type="button"
-                onClick={handleRegisterTrigger}
-                className="group relative w-full sm:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-[#febf4a] via-[#ffd982] to-[#febf4a] text-[#3a0826] font-display font-bold text-base uppercase tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg transition-all flex items-center justify-center gap-3 cursor-pointer"
+              {/* Primary Registration Link */}
+              <a
+                href={FESTIVAL_INFO.registrationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative w-full sm:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-[#febf4a] via-[#ffd982] to-[#febf4a] text-[#3a0826] font-display font-bold text-base uppercase tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg hover:scale-105 transition-all flex items-center justify-center gap-3 cursor-pointer"
               >
                 <span>REGISTER NOW</span>
                 <ArrowRight className="w-5 h-5 text-[#3a0826] transition-transform group-hover:translate-x-1" />
-              </button>
+              </a>
             </div>
 
-            <p className="text-xs text-[#fff0c2]/60 mt-6">
-              Official pass booking will be activated as soon as the portal opens.
+            <p className="text-xs text-[#fff0c2]/60 mt-6 flex items-center justify-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-[#febf4a]" />
+              <span>Click above to register on the official NUV portal</span>
             </p>
 
           </div>
         </div>
 
       </div>
-
-      {/* Registration Starting Soon Festive Modal Alert - Rendered via Portal at document.body for iOS */}
-      {typeof document !== 'undefined' && createPortal(
-        <AnimatePresence>
-          {alertModalOpen && (
-            <div 
-              className="fixed inset-0 z-[9999] overflow-y-auto flex items-center justify-center p-4 backdrop-blur-md bg-black/85"
-              onClick={closeAlertModal}
-              onTouchEnd={(e) => {
-                if (e.target === e.currentTarget) {
-                  closeAlertModal(e);
-                }
-              }}
-            >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                transition={{ duration: 0.2 }}
-                onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-md bg-gradient-to-b from-[#2a061b] via-[#3a0826] to-[#0f4d5b] border-2 border-[#febf4a]/60 rounded-3xl p-6 sm:p-8 shadow-[0_20px_60px_rgba(0,0,0,0.95)] text-center overflow-hidden"
-              >
-                {/* Large iOS-friendly close button with high touch target */}
-                <button
-                  type="button"
-                  onClick={closeAlertModal}
-                  onTouchEnd={closeAlertModal}
-                  className="absolute top-4 right-4 z-50 min-w-[44px] min-h-[44px] rounded-full border border-[#febf4a]/50 bg-[#3a0826] text-[#febf4a] hover:bg-[#5f1040] active:scale-90 flex items-center justify-center transition-all cursor-pointer shadow-lg"
-                  aria-label="Close"
-                >
-                  <X className="w-5 h-5 text-[#febf4a]" />
-                </button>
-
-                {/* Alert Icon */}
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#febf4a]/30 to-[#5f1040]/60 border border-[#febf4a] text-[#febf4a] flex items-center justify-center mx-auto mb-4 shadow-gold-glow">
-                  <Bell className="w-8 h-8 animate-bounce" />
-                </div>
-
-                {/* Alert Badge */}
-                <div className="inline-block px-3 py-1 rounded-full bg-[#febf4a]/20 border border-[#febf4a]/50 text-[#febf4a] text-xs font-bold uppercase tracking-widest mb-3">
-                  Notice
-                </div>
-
-                {/* Main Alert Title */}
-                <h4 className="font-display text-2xl sm:text-3xl font-extrabold text-gradient-gold mb-3">
-                  Registration Starting Soon!
-                </h4>
-
-                <p className="text-sm text-[#fff0c2]/90 leading-relaxed mb-4">
-                  Official entry passes and attendee registration for <strong className="text-[#febf4a]">NUV खेलैया 2026</strong> at <strong>Jyoti Party Plot</strong> will go live shortly.
-                </p>
-
-                <div className="p-3.5 rounded-xl bg-[#12020d]/80 border border-[#febf4a]/30 mb-6 flex items-center justify-center gap-2 text-xs text-[#febf4a] font-medium">
-                  <Sparkles className="w-4 h-4 flex-shrink-0" />
-                  <span>Stay tuned to this official portal for pass announcements!</span>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={closeAlertModal}
-                  onTouchEnd={closeAlertModal}
-                  className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#febf4a] to-[#ffd982] text-[#3a0826] font-bold text-sm uppercase tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg active:scale-95 transition-all cursor-pointer"
-                >
-                  Got It
-                </button>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>,
-        document.body
-      )}
-
     </section>
   );
 }
+

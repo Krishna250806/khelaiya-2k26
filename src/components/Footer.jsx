@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUp, MapPin } from 'lucide-react';
 import { ToranBorder, DiyaIcon, MandalaPattern } from './common/MandalaDecorations';
+import { FESTIVAL_INFO } from '../data/festivalData';
 
 export default function Footer({ onRegisterClick }) {
   const scrollToTop = () => {
@@ -72,11 +73,12 @@ export default function Footer({ onRegisterClick }) {
               Join The Circle
             </h4>
             <p className="text-xs text-[#fff0c2]/75 mb-4">
-              Be part of NUV खेलैया. Stay connected for registration announcements.
+              Be part of NUV खेलैया. Book your official passes now.
             </p>
             <a
-              href="#registration"
-              onClick={onRegisterClick}
+              href={FESTIVAL_INFO.registrationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full py-2.5 rounded-full bg-gradient-to-r from-[#febf4a] to-[#ffd982] text-[#3a0826] font-bold text-xs uppercase tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg transition-all inline-block text-center cursor-pointer"
             >
               REGISTER NOW
