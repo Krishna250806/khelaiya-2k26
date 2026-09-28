@@ -181,11 +181,7 @@ export default function SponsorsSection() {
                 >
                   <div className="h-full rounded-[22px] bg-gradient-to-br from-[#330520] via-[#24061a] to-[#0a232b] p-6 sm:p-8 flex items-center justify-center relative overflow-hidden">
                     
-                    {/* Ornate Corner Accents */}
-                    <div className="absolute top-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
-                    <div className="absolute top-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
-                    <div className="absolute bottom-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
-                    <div className="absolute bottom-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
+
 
                     {/* Brand Logo Only (No text inside card) */}
                     <div className="w-full max-w-[320px] sm:max-w-[380px] h-48 sm:h-56 rounded-2xl bg-white p-3 sm:p-5 flex items-center justify-center shadow-xl border-2 border-[#febf4a] group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
@@ -234,11 +230,7 @@ export default function SponsorsSection() {
                 >
                   <div className="h-full rounded-[22px] bg-gradient-to-br from-[#330520] via-[#24061a] to-[#0a232b] p-6 sm:p-8 flex items-center justify-center relative overflow-hidden">
                     
-                    {/* Ornate Corner Accents */}
-                    <div className="absolute top-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
-                    <div className="absolute top-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
-                    <div className="absolute bottom-2.5 left-2.5 text-[#febf4a]/30 text-xs">✦</div>
-                    <div className="absolute bottom-2.5 right-2.5 text-[#febf4a]/30 text-xs">✦</div>
+
 
                     {/* Brand Logo Only (No text inside card) */}
                     <div className="w-full max-w-[320px] sm:max-w-[380px] h-48 sm:h-56 rounded-2xl bg-white p-3 sm:p-5 flex items-center justify-center shadow-xl border-2 border-[#febf4a] group-hover:scale-105 group-hover:shadow-gold-glow transition-all duration-300 overflow-hidden">
