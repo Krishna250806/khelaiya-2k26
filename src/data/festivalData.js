@@ -382,7 +382,7 @@ export const SPONSORS_DATA = {
       id: "other-amul-organic",
       name: "Amul Organic",
       role: "Gifting Partner",
-      logo: "/sponsors/amul.png",
+      logo: "/sponsors/amul_organic.png",
     },
     {
       id: "other-black-bunny",
