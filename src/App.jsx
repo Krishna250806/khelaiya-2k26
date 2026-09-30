@@ -11,7 +11,7 @@ import RegisterCtaSection from './components/RegisterCtaSection';
 import GallerySection from './components/GallerySection';
 import ScheduleFaqSection from './components/ScheduleFaqSection';
 import Footer from './components/Footer';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react";
 export default function App() {
   // Check if user has previously opened doors or was at a specific section on refresh
   const [doorsOpen, setDoorsOpen] = useState(() => {
