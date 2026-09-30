@@ -11,7 +11,7 @@ import RegisterCtaSection from './components/RegisterCtaSection';
 import GallerySection from './components/GallerySection';
 import ScheduleFaqSection from './components/ScheduleFaqSection';
 import Footer from './components/Footer';
-
+import { Analytics } from "@vercel/analytics/next"
 export default function App() {
   // Check if user has previously opened doors or was at a specific section on refresh
   const [doorsOpen, setDoorsOpen] = useState(() => {
@@ -119,7 +119,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#210314] text-[#fff0c2] selection:bg-[#febf4a] selection:text-[#3a0826] overflow-x-hidden">
-      
+
       {/* 1. Custom 3D Ornate Door Entry Loader */}
       {!doorsOpen && (
         <DoorLoader onComplete={handleDoorComplete} />
@@ -127,7 +127,7 @@ export default function App() {
 
       {/* 2. Main Festival Experience */}
       <div className={`transition-opacity duration-1000 ${doorsOpen ? 'opacity-100' : 'opacity-0'}`}>
-        
+
         {/* Sticky Glassmorphic Navbar */}
         <Navbar
           onRegisterClick={handleScrollToRegistration}
