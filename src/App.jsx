@@ -119,6 +119,7 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-[#210314] text-[#fff0c2] selection:bg-[#febf4a] selection:text-[#3a0826] overflow-x-hidden">
+      <Analytics />
 
       {/* 1. Custom 3D Ornate Door Entry Loader */}
       {!doorsOpen && (
